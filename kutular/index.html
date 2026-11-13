@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>tane. Kutu Prototipleri</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a packaging studio wall. Each box sits on its own plinth in 3D, specs beside it like a production sheet. */
+:root{
+  --bg:#E6E3DF; --panel:#F3F1EE; --fg:#1B1817; --mute:#6E6763; --line:#D2CDC8;
+  --display:"Fraunces", Georgia, serif; --body:"Manrope", system-ui, sans-serif; --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+  /* brand lines (print colours stay fixed in both themes) */
+  --nar:#9E2B3A; --nar-in:#F4D9D5; --nar-deep:#5A1424;
+  --yaprak:#3F5D3A; --yaprak-in:#DCE6D2; --yaprak-deep:#22351F;
+  --bal:#B07A2A; --bal-in:#F3E4C4; --pekmez:#4A2A12;
+  --kabuk:#F6F0E6; --murekkep:#1F1A17;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151312;--panel:#1E1B1A;--fg:#EEE9E4;--mute:#A39B95;--line:#33302D;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#151312;--panel:#1E1B1A;--fg:#EEE9E4;--mute:#A39B95;--line:#33302D;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);line-height:1.55;font-size:16px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;line-height:1.05;text-wrap:balance;font-variation-settings:"SOFT" 100}
+p{margin:0}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.04em}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--fg);outline-offset:3px;border-radius:6px}
+
+header.intro{padding-block:56px 40px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:end;border-bottom:1px solid var(--line)}
+@media(max-width:860px){header.intro{grid-template-columns:1fr}}
+header.intro h1{font-size:clamp(56px,9vw,128px);letter-spacing:-.045em;font-weight:350}
+header.intro h1 i{font-style:normal;color:var(--nar)}
+header.intro .meta{display:grid;gap:10px;color:var(--mute)}
+.sheet{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;font-family:var(--mono);font-size:12px}
+.sheet dt{color:var(--mute)} .sheet dd{margin:0}
+
+/* palette */
+.palette{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding-block:40px}
+@media(max-width:860px){.palette{grid-template-columns:1fr 1fr}}
+.sw{border-radius:16px;overflow:hidden;background:var(--panel)}
+.sw .chips{display:grid;grid-template-columns:2fr 1fr 1fr;height:110px}
+.sw .chips span{display:flex;align-items:end;padding:8px;font-family:var(--mono);font-size:10px}
+.sw .cap{padding:12px 14px}
+.sw .cap b{font-family:var(--display);font-size:22px;font-weight:400;display:block}
+
+/* product rows */
+.proto{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;padding-block:44px;border-top:1px solid var(--line);align-items:center}
+@media(max-width:920px){.proto{grid-template-columns:1fr}}
+.stage{position:relative;height:460px;border-radius:24px;background:radial-gradient(120% 90% at 50% 20%,var(--panel),var(--bg));overflow:hidden;touch-action:pan-y;cursor:grab;user-select:none}
+.stage:active{cursor:grabbing}
+.stage .floor{position:absolute;left:50%;bottom:70px;width:360px;max-width:80%;height:40px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(0,0,0,.28),transparent);filter:blur(4px)}
+.scene{position:absolute;inset:0;perspective:1100px;display:grid;place-items:center}
+.ctrl{position:absolute;left:16px;bottom:16px;display:flex;gap:8px;flex-wrap:wrap;right:16px}
+.ctrl button{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:8px 14px;font-weight:700;font-size:13px}
+.ctrl button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.hint{position:absolute;right:16px;top:14px;font-family:var(--mono);font-size:11px;color:var(--mute)}
+
+/* 3D box */
+.b3{--W:280px;--H:126px;--D:210px;--ry:-32deg;--rx:-22deg;--open:0deg;
+  position:relative;width:0;height:0;transform-style:preserve-3d;transform:translateY(10px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .2s}
+.b3.spin{animation:spin 18s linear infinite}
+@keyframes spin{from{transform:translateY(10px) rotateX(var(--rx)) rotateY(var(--ry))}to{transform:translateY(10px) rotateX(var(--rx)) rotateY(calc(var(--ry) + 360deg))}}
+.f{position:absolute;left:0;top:0;backface-visibility:hidden}
+.front,.back{width:var(--W);height:var(--H);margin:calc(var(--H)/-2) 0 0 calc(var(--W)/-2)}
+.left,.right{width:var(--D);height:var(--H);margin:calc(var(--H)/-2) 0 0 calc(var(--D)/-2)}
+.bottom,.topf,.tissue{width:var(--W);height:var(--D);margin:calc(var(--D)/-2) 0 0 calc(var(--W)/-2)}
+.front{transform:translateZ(calc(var(--D)/2))}
+.back{transform:rotateY(180deg) translateZ(calc(var(--D)/2))}
+.right{transform:rotateY(90deg) translateZ(calc(var(--W)/2))}
+.left{transform:rotateY(-90deg) translateZ(calc(var(--W)/2))}
+.bottom{transform:rotateX(-90deg) translateZ(calc(var(--H)/2))}
+/* inner walls */
+.in.front{transform:rotateY(180deg) translateZ(calc(var(--D)/-2 + 1px))}
+.in.back{transform:translateZ(calc(var(--D)/-2 + 1px))}
+.in.right{transform:rotateY(-90deg) translateZ(calc(var(--W)/-2 + 1px))}
+.in.left{transform:rotateY(90deg) translateZ(calc(var(--W)/-2 + 1px))}
+.in.bottom{transform:rotateX(90deg) translateZ(calc(var(--H)/-2 + 1px))}
+.tissue{transform:rotateX(90deg) translateZ(calc(var(--H)/2 - 26px));transform-style:preserve-3d}
+/* lid hinged at back edge */
+.lidpos{position:absolute;left:0;top:0;transform-style:preserve-3d;transform:translateY(calc(var(--H)/-2)) translateZ(calc(var(--D)/-2))}
+.lid{position:absolute;left:0;top:0;width:var(--W);height:var(--D);margin-left:calc(var(--W)/-2);transform-origin:50% 0;transform:rotateX(calc(90deg - var(--open)));transform-style:preserve-3d;transition:transform 1.1s cubic-bezier(.6,0,.2,1)}
+.lid .out,.lid .inn{position:absolute;inset:0;backface-visibility:hidden}
+.lid .inn{transform:rotateX(180deg)}
+.lid .lip{position:absolute;left:0;right:0;bottom:0;height:22px;transform-origin:50% 100%;transform:rotateX(-90deg)}
+.b3.open{--open:-118deg}
+
+/* prints */
+.print{display:flex;flex-direction:column;justify-content:space-between;padding:14px 16px;font-family:var(--display)}
+.seeds{background-image:radial-gradient(circle at 2px 2px,rgba(255,255,255,.14) 1.2px,transparent 1.6px);background-size:18px 18px}
+.veins{background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.08) 0 2px,transparent 2px 16px)}
+.comb{background-image:radial-gradient(circle at 50% 50%,rgba(255,255,255,.10) 30%,transparent 32%);background-size:16px 14px}
+.logo-xl{font-size:56px;letter-spacing:-.04em;line-height:.9}
+.logo-xl i{font-style:normal}
+.small{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase}
+.band{position:absolute;top:0;bottom:0;left:50%;width:44px;margin-left:-22px;background:var(--kabuk);color:var(--murekkep);display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase}
+.ribbon-v{position:absolute;top:0;bottom:0;left:50%;width:18px;margin-left:-9px;background:var(--nar)}
+.ribbon-h{position:absolute;left:0;right:0;top:50%;height:18px;margin-top:-9px;background:var(--nar)}
+.wax{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#C24152,var(--nar-deep));color:var(--kabuk);display:grid;place-items:center;font-family:var(--display);font-size:22px;box-shadow:0 2px 0 rgba(0,0,0,.25)}
+
+/* tissue contents */
+.tissue .paper{position:absolute;inset:0;border-radius:4px}
+.tissue .card{position:absolute;left:10px;top:10px;width:96px;height:68px;background:var(--kabuk);border-radius:3px;box-shadow:0 2px 6px rgba(0,0,0,.18);font-family:var(--display);font-size:13px;padding:8px;color:var(--murekkep);transform:rotate(-4deg)}
+.tissue .card small{display:block;font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;margin-top:4px;color:#6E6763}
+.tissue .fr{position:absolute;border-radius:50%;box-shadow:inset -6px -8px 0 rgba(0,0,0,.18),0 4px 6px rgba(0,0,0,.2)}
+
+/* spec */
+.spec{display:grid;gap:16px}
+.spec h2{font-size:clamp(36px,4.6vw,56px);letter-spacing:-.02em}
+.spec .tagline{color:var(--mute);max-width:460px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td{padding:9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td:first-child{font-family:var(--mono);font-size:12px;color:var(--mute);width:36%;padding-right:14px}
+.pill{display:inline-block;border-radius:999px;padding:4px 10px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid currentColor}
+.dots{display:flex;gap:6px}.dots i{width:18px;height:18px;border-radius:50%;border:1px solid var(--line)}
+
+/* details */
+.details{padding-block:56px;border-top:1px solid var(--line)}
+.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+@media(max-width:920px){.dgrid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:560px){.a6{aspect-ratio:auto}.a6 ul{columns:1}}
+.dcard{grid-template-columns:minmax(0,1fr);background:var(--panel);border-radius:20px;padding:20px;display:grid;gap:14px;align-content:start;min-width:0}
+.dcard h3{font-size:24px}
+.dcard p{color:var(--mute);font-size:14px}
+.a6{aspect-ratio:148/105;border-radius:6px;background:var(--kabuk);color:var(--murekkep);padding:16px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;box-shadow:0 10px 24px -14px rgba(0,0,0,.4);font-size:11px;max-width:100%}
+.a6 h4{font-family:var(--display);font-weight:400;font-size:20px;margin:0 0 6px}
+.a6 ul{margin:0;padding-left:14px;columns:2;column-gap:14px}
+.qr{width:64px;height:64px;display:grid;grid-template-columns:repeat(9,1fr);gap:1px}
+.qr i{background:var(--murekkep)}.qr i.o{background:transparent}
+.seal{height:60px;border-radius:4px;background:var(--kabuk);color:var(--murekkep);display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 10px 24px -14px rgba(0,0,0,.4);border-left:6px solid var(--nar);border-right:6px solid var(--nar)}
+.seal b{font-family:var(--display);font-size:22px;letter-spacing:0;text-transform:none;font-weight:400}
+.stickers{display:flex;gap:14px;flex-wrap:wrap}
+.st{width:92px;height:92px;border-radius:50%;display:grid;place-items:center;text-align:center;font-family:var(--display);font-size:24px;line-height:.9}
+.st small{display:block;font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;margin-top:4px}
+
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:28px}
+@media(max-width:920px){.steps{grid-template-columns:1fr 1fr}}
+.step{border-top:2px solid var(--fg);padding-top:12px;display:grid;gap:6px}
+.step b{font-family:var(--display);font-size:22px;font-weight:400}
+.step span{font-family:var(--mono);font-size:12px;color:var(--mute)}
+.step p{font-size:14px;color:var(--mute)}
+
+.lockups{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:28px}
+@media(max-width:920px){.lockups{grid-template-columns:1fr 1fr}}
+.lk{aspect-ratio:1;border-radius:18px;display:flex;flex-direction:column;justify-content:space-between;padding:16px}
+.lk .w{font-family:var(--display);font-size:46px;letter-spacing:-.04em;line-height:.9}
+.lk .s{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+footer{padding-block:40px;border-top:1px solid var(--line);color:var(--mute);font-size:13px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(max-width:560px){.stage{height:380px}.b3{--W:210px!important;--H:96px!important;--D:158px!important}.b3.k{--W:170px!important;--H:58px!important;--D:124px!important}.b3.h{--W:170px!important;--H:86px!important;--D:116px!important}.logo-xl{font-size:40px}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="intro">
+    <div>
+      <p class="eyebrow">Ambalaj prototipleri · v0.1 · Kasım 2026</p>
+      <h1>tane<i>.</i> kutuları</h1>
+    </div>
+    <div class="meta">
+      <p>Dört kutu, bir sistem. Her ürün hattının kendi rengi var; logo, mühür ve kart hepsinde aynı. Kutuları sürükleyip çevirebilir, kapağını açabilirsin.</p>
+      <dl class="sheet"><dt>Malzeme</dt><dd>E-dalga oluklu mukavva, dışı ofset baskı</dd><dt>İç</dt><dd>Tek renk iç baskı, pelür, kağıt talaş</dd><dt>Plastik</dt><dd>Yok</dd></dl>
+    </div>
+  </header>
+
+  <section class="palette" aria-label="Renk sistemi">
+    <div class="sw"><div class="chips"><span style="background:var(--nar);color:var(--kabuk)">Nar #9E2B3A</span><span style="background:var(--nar-in);color:var(--murekkep)">#F4D9D5</span><span style="background:var(--nar-deep);color:var(--kabuk)">#5A1424</span></div><div class="cap"><b>tane. meyve</b><span class="mono">Meyve kutuları</span></div></div>
+    <div class="sw"><div class="chips"><span style="background:var(--yaprak);color:var(--kabuk)">Yaprak #3F5D3A</span><span style="background:var(--yaprak-in);color:var(--murekkep)">#DCE6D2</span><span style="background:var(--yaprak-deep);color:var(--kabuk)">#22351F</span></div><div class="cap"><b>tane. yeşil</b><span class="mono">Sebze kutuları</span></div></div>
+    <div class="sw"><div class="chips"><span style="background:var(--bal);color:var(--murekkep)">Bal #B07A2A</span><span style="background:var(--bal-in);color:var(--murekkep)">#F3E4C4</span><span style="background:var(--pekmez);color:var(--kabuk)">#4A2A12</span></div><div class="cap"><b>tane. kiler</b><span class="mono">Bal, pekmez, peynir · yakında</span></div></div>
+    <div class="sw"><div class="chips"><span style="background:var(--murekkep);color:var(--kabuk)">Mürekkep #1F1A17</span><span style="background:var(--kabuk);color:var(--murekkep)">#F6F0E6</span><span style="background:#fff;color:var(--murekkep)">Beyaz</span></div><div class="cap"><b>tane.</b><span class="mono">Ana marka, kart, mühür</span></div></div>
+  </section>
+
+  <!-- 1 MEYVE -->
+  <section class="proto">
+    <div class="stage" data-stage>
+      <span class="hint">sürükle → çevir</span>
+      <div class="floor"></div>
+      <div class="scene">
+        <div class="b3 spin" style="--W:280px;--H:126px;--D:210px">
+          <div class="f front print seeds" style="background:var(--nar);color:var(--kabuk)"><span class="small">meyve · sofra · ~7 kg</span><span class="logo-xl">tane<i style="color:var(--nar-in)">.</i></span><span class="small">tane tane seçildi</span><div class="band">No. 0127 · Salı dalındaydı</div></div>
+          <div class="f back print seeds" style="background:var(--nar);color:var(--kabuk)"><span class="small">İzmir · Fethiye · Antalya</span><span style="font-size:20px;font-style:italic">Yemeden önce yıkayın.<br>Serin yerde saklayın.</span><span class="small">tane.com.tr</span></div>
+          <div class="f right print seeds" style="background:var(--nar-deep);color:var(--kabuk)"><span class="small">bu taraf yukarı ↑</span><span style="font-size:28px">meyve</span></div>
+          <div class="f left print seeds" style="background:var(--nar-deep);color:var(--kabuk)"><span class="small">elle kutulandı</span><span style="font-size:28px">tane.</span></div>
+          <div class="f bottom" style="background:var(--nar-deep)"></div>
+          <div class="f in front" style="background:var(--nar-in)"></div><div class="f in back" style="background:var(--nar-in)"></div><div class="f in left" style="background:var(--nar-in)"></div><div class="f in right" style="background:var(--nar-in)"></div><div class="f in bottom" style="background:var(--nar-in)"></div>
+          <div class="f tissue"><div class="paper" style="background:#FBEDEA;background-image:repeating-linear-gradient(80deg,rgba(158,43,58,.06) 0 3px,transparent 3px 11px)"></div>
+            <div class="fr" style="left:120px;top:24px;width:58px;height:58px;background:#B5263A"></div>
+            <div class="fr" style="left:186px;top:30px;width:50px;height:50px;background:#E8832A"></div>
+            <div class="fr" style="left:140px;top:96px;width:44px;height:62px;background:#3E5A2A;border-radius:50% 50% 46% 46%"></div>
+            <div class="fr" style="left:196px;top:100px;width:48px;height:48px;background:#8DB33E;box-shadow:inset 0 0 0 6px #7A5A33"></div>
+            <div class="fr" style="left:30px;top:110px;width:52px;height:52px;background:#E7C53D"></div>
+            <div class="card">Bu hafta kutuda<small>8 ürün · Seferihisar, Köyceğiz…</small></div></div>
+          <div class="lidpos"><div class="lid"><div class="out seeds" style="background:var(--nar);display:grid;place-items:center"><span style="font-family:var(--display);font-size:64px;color:var(--kabuk);letter-spacing:-.04em">tane<span style="color:var(--nar-in)">.</span></span><div class="band" style="writing-mode:horizontal-tb;left:0;right:0;width:auto;margin:0;top:auto;bottom:0;height:22px"></div></div><div class="inn" style="background:var(--nar-in);display:grid;place-items:center;font-family:var(--display);font-style:italic;font-size:22px;color:var(--nar)">Afiyet olsun.</div><div class="lip seeds" style="background:var(--nar)"></div></div></div>
+        </div>
+      </div>
+      <div class="ctrl"><button data-open aria-pressed="false">Kapağı aç</button><button data-spin aria-pressed="true">Dönsün</button></div>
+    </div>
+    <div class="spec">
+      <span class="pill" style="color:var(--nar)">Lansman · amiral ürün</span>
+      <h2>tane. meyve · Sofra</h2>
+      <p class="tagline">Dışı nar kırmızısı, içi pembe kabuk. Kapak açılınca ilk önce "Afiyet olsun." yazısı, sonra pelüre sarılı meyveler ve haftanın kartı görünür.</p>
+      <table>
+        <tr><td>Ölçü</td><td>40 × 30 × 18 cm, ~7 kg</td></tr>
+        <tr><td>Aynı kalıp</td><td>Tadım 30 × 20 × 15 · Bolluk 50 × 35 × 20</td></tr>
+        <tr><td>Dış baskı</td><td>Nar zemin, kabuk renk logo, çekirdek deseni; kapakta kör kabartma logo</td></tr>
+        <tr><td>İç baskı</td><td>Pembe kabuk zemin, kapak içinde "Afiyet olsun."</td></tr>
+        <tr><td>Mühür</td><td>Numaralı kabuk renk kağıt şerit, kapaktan öne iner</td></tr>
+        <tr><td>İçerik katmanı</td><td>Pelür, haftanın kartı, hassas meyveye kağıt viyol, kağıt talaş</td></tr>
+        <tr><td>Tahmini birim maliyet</td><td>~70–90 TL (500 adet; matbaa teklifiyle netleşir)</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 2 YESIL -->
+  <section class="proto">
+    <div class="stage" data-stage>
+      <span class="hint">sürükle → çevir</span>
+      <div class="floor"></div>
+      <div class="scene">
+        <div class="b3 spin" style="--W:280px;--H:126px;--D:210px;--ry:-140deg">
+          <div class="f front print veins" style="background:var(--yaprak);color:var(--kabuk)"><span class="small">yeşil · mutfak · ~7 kg</span><span class="logo-xl">tane<i style="color:var(--yaprak-in)">.</i></span><span class="small">tarladan bu haftanın sekizi</span><div class="band">No. 0128 · Salı tarladaydı</div></div>
+          <div class="f back print veins" style="background:var(--yaprak);color:var(--kabuk)"><span class="small">İzmir · Fethiye · Antalya</span><span style="font-size:20px;font-style:italic">Yeşillikleri ilk iki gün tüketin.</span><span class="small">tane.com.tr</span></div>
+          <div class="f right print veins" style="background:var(--yaprak-deep);color:var(--kabuk)"><span class="small">bu taraf yukarı ↑</span><span style="font-size:28px">yeşil</span></div>
+          <div class="f left print veins" style="background:var(--yaprak-deep);color:var(--kabuk)"><span class="small">elle kutulandı</span><span style="font-size:28px">tane.</span></div>
+          <div class="f bottom" style="background:var(--yaprak-deep)"></div>
+          <div class="f in front" style="background:var(--yaprak-in)"></div><div class="f in back" style="background:var(--yaprak-in)"></div><div class="f in left" style="background:var(--yaprak-in)"></div><div class="f in right" style="background:var(--yaprak-in)"></div><div class="f in bottom" style="background:var(--yaprak-in)"></div>
+          <div class="f tissue"><div class="paper" style="background:#EEF3E8;background-image:repeating-linear-gradient(80deg,rgba(63,93,58,.07) 0 3px,transparent 3px 11px)"></div>
+            <div class="fr" style="left:120px;top:22px;width:60px;height:52px;background:#D63A2A"></div>
+            <div class="fr" style="left:190px;top:26px;width:56px;height:56px;background:#3F7A3A"></div>
+            <div class="fr" style="left:130px;top:96px;width:110px;height:22px;border-radius:12px;background:#E8832A"></div>
+            <div class="fr" style="left:140px;top:130px;width:90px;height:36px;border-radius:18px;background:#4E9A3A"></div>
+            <div class="fr" style="left:28px;top:112px;width:70px;height:50px;border-radius:40% 60% 50% 50%;background:#6FA35A"></div>
+            <div class="card">Bu hafta kutuda<small>8 ürün · Kumluca, Menemen…</small></div></div>
+          <div class="lidpos"><div class="lid"><div class="out veins" style="background:var(--yaprak);display:grid;place-items:center"><span style="font-family:var(--display);font-size:64px;color:var(--kabuk);letter-spacing:-.04em">tane<span style="color:var(--yaprak-in)">.</span></span><div class="band" style="writing-mode:horizontal-tb;left:0;right:0;width:auto;margin:0;top:auto;bottom:0;height:22px"></div></div><div class="inn" style="background:var(--yaprak-in);display:grid;place-items:center;font-family:var(--display);font-style:italic;font-size:22px;color:var(--yaprak)">Kolay gelsin.</div><div class="lip veins" style="background:var(--yaprak)"></div></div></div>
+        </div>
+      </div>
+      <div class="ctrl"><button data-open aria-pressed="false">Kapağı aç</button><button data-spin aria-pressed="true">Dönsün</button></div>
+    </div>
+    <div class="spec">
+      <span class="pill" style="color:var(--yaprak)">Lansman</span>
+      <h2>tane. yeşil · Mutfak</h2>
+      <p class="tagline">Sebze kutusu meyveden ayrı bir dünya: yaprak yeşili, damar deseni ve "Kolay gelsin." Böylece sebze bir ihtiyaç listesi gibi değil, markanın ikinci rengi gibi duruyor.</p>
+      <table>
+        <tr><td>Ölçü</td><td>40 × 30 × 18 cm, ~7 kg (meyveyle aynı kalıp)</td></tr>
+        <tr><td>Dış baskı</td><td>Yaprak zemin, damar deseni, kabuk renk logo</td></tr>
+        <tr><td>İç baskı</td><td>Filiz yeşili, kapak içinde "Kolay gelsin."</td></tr>
+        <tr><td>İçerik katmanı</td><td>Yeşillik kağıt şeritle demetli; domates kağıt viyolde</td></tr>
+        <tr><td>Karma kutu</td><td>Aynı kalıp; kapak nar, gövde yaprak (İkisi Bir Arada)</td></tr>
+        <tr><td>Tahmini birim maliyet</td><td>~65–80 TL (500 adet)</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 3 HEDIYE -->
+  <section class="proto">
+    <div class="stage" data-stage>
+      <span class="hint">sürükle → çevir</span>
+      <div class="floor"></div>
+      <div class="scene">
+        <div class="b3 h spin" style="--W:210px;--H:110px;--D:150px;--ry:-24deg">
+          <div class="f front print" style="background:var(--kabuk);color:var(--nar)"><span class="small">hediye · tadım</span><span class="logo-xl" style="font-size:44px">tane<i>.</i></span><span class="small">senin için seçildi</span><div class="ribbon-v"></div></div>
+          <div class="f back print" style="background:var(--kabuk);color:var(--nar)"><div class="ribbon-v"></div></div>
+          <div class="f right print" style="background:var(--kabuk);color:var(--nar)"><div class="ribbon-v"></div></div>
+          <div class="f left print" style="background:var(--kabuk);color:var(--nar)"><div class="ribbon-v"></div></div>
+          <div class="f bottom" style="background:#E8DFD2"></div>
+          <div class="f in front" style="background:var(--nar)"></div><div class="f in back" style="background:var(--nar)"></div><div class="f in left" style="background:var(--nar)"></div><div class="f in right" style="background:var(--nar)"></div><div class="f in bottom" style="background:var(--nar)"></div>
+          <div class="f tissue" style="--H:110px"><div class="paper" style="background:#F6E2DE"></div>
+            <div class="fr" style="left:110px;top:20px;width:46px;height:46px;background:#B5263A"></div>
+            <div class="fr" style="left:150px;top:70px;width:42px;height:42px;background:#E8832A"></div>
+            <div class="fr" style="left:96px;top:84px;width:40px;height:40px;background:#8DB33E;box-shadow:inset 0 0 0 5px #7A5A33"></div>
+            <div class="card" style="font-style:italic">Yeni evine hoş geldin!<small>el yazısı not kartı</small></div></div>
+          <div class="lidpos"><div class="lid"><div class="out" style="background:var(--kabuk)"><div class="ribbon-v"></div><div class="ribbon-h"></div><div class="wax">t.</div></div><div class="inn" style="background:var(--nar);display:grid;place-items:center;font-family:var(--display);font-style:italic;font-size:18px;color:var(--kabuk)">Senin için.</div><div class="lip" style="background:var(--kabuk)"><div class="ribbon-v"></div></div></div></div>
+        </div>
+      </div>
+      <div class="ctrl"><button data-open aria-pressed="false">Kapağı aç</button><button data-spin aria-pressed="true">Dönsün</button></div>
+    </div>
+    <div class="spec">
+      <span class="pill" style="color:var(--nar)">Eklenti · +150 TL</span>
+      <h2>Hediye kutusu</h2>
+      <p class="tagline">Ters renk: dışı kabuk rengi, içi nar. Nar kırmızısı kurdele ve "t." mühürlü balmumu. Yılbaşı, Sevgililer Günü ve Anneler Günü kampanyalarının kutusu.</p>
+      <table>
+        <tr><td>Ölçü</td><td>30 × 20 × 15 cm (Tadım), Sofra boyunda da var</td></tr>
+        <tr><td>Dış</td><td>Kabuk zemin, nar logo, gros grain kurdele</td></tr>
+        <tr><td>Mühür</td><td>Balmumu görünümlü kabartma etiket "t."</td></tr>
+        <tr><td>İç</td><td>Nar zemin, kapak içinde "Senin için."</td></tr>
+        <tr><td>Kart</td><td>Siparişteki not, el yazısı fontuyla basılır</td></tr>
+        <tr><td>Tahmini ek maliyet</td><td>~45–60 TL (kurdele, mühür, kart)</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 4 KILER -->
+  <section class="proto">
+    <div class="stage" data-stage>
+      <span class="hint">sürükle → çevir</span>
+      <div class="floor"></div>
+      <div class="scene">
+        <div class="b3 k spin" style="--W:230px;--H:76px;--D:168px;--ry:-36deg">
+          <div class="f front print comb" style="background:var(--pekmez);color:var(--bal-in);flex-direction:row;align-items:center"><span class="logo-xl" style="font-size:40px">tane<i style="color:var(--bal)">.</i></span><span class="small" style="color:var(--bal)">kiler</span></div>
+          <div class="f back print comb" style="background:var(--pekmez);color:var(--bal-in)"><span class="small">süzme bal · pekmez · peynir</span></div>
+          <div class="f right comb" style="background:var(--bal)"></div>
+          <div class="f left comb" style="background:var(--bal)"></div>
+          <div class="f bottom" style="background:var(--pekmez)"></div>
+          <div class="f in front" style="background:var(--bal-in)"></div><div class="f in back" style="background:var(--bal-in)"></div><div class="f in left" style="background:var(--bal-in)"></div><div class="f in right" style="background:var(--bal-in)"></div><div class="f in bottom" style="background:var(--bal-in)"></div>
+          <div class="f tissue" style="--H:76px"><div class="paper" style="background:#EBD8B0"></div>
+            <div class="fr" style="left:110px;top:30px;width:50px;height:50px;background:#D9962F;border-radius:12px"></div>
+            <div class="fr" style="left:168px;top:30px;width:50px;height:50px;background:#4A2A12;border-radius:12px"></div>
+            <div class="fr" style="left:110px;top:94px;width:108px;height:54px;background:#F6EEDC;border-radius:10px"></div>
+            <div class="card">Kiler kartı<small>arıcı · köy · parti no</small></div></div>
+          <div class="lidpos"><div class="lid"><div class="out comb" style="background:var(--pekmez);display:grid;place-items:center"><span style="font-family:var(--display);font-size:48px;color:var(--bal-in);letter-spacing:-.04em">tane<span style="color:var(--bal)">.</span> <span style="font-size:22px;color:var(--bal)">kiler</span></span></div><div class="inn" style="background:var(--bal-in);display:grid;place-items:center;font-family:var(--display);font-style:italic;font-size:20px;color:var(--pekmez)">Kahvaltın hazır.</div><div class="lip comb" style="background:var(--pekmez)"></div></div></div>
+        </div>
+      </div>
+      <div class="ctrl"><button data-open aria-pressed="false">Kapağı aç</button><button data-spin aria-pressed="true">Dönsün</button></div>
+    </div>
+    <div class="spec">
+      <span class="pill" style="color:var(--bal)">Yakında · Faz 2</span>
+      <h2>tane. kiler</h2>
+      <p class="tagline">Bal, pekmez ve peynir için yassı bir kahvaltı kutusu. Pekmez rengi gövde, bal rengi yanlar, petek deseni. Kargoya da uygun, çünkü Türkiye geneline gönderilecek tek hat bu.</p>
+      <table>
+        <tr><td>Ölçü</td><td>30 × 22 × 10 cm</td></tr>
+        <tr><td>İç</td><td>Kalıplı kağıt yuva: 2 kavanoz + 1 peynir paketi</td></tr>
+        <tr><td>Kart</td><td>Üretici adı, köy, parti numarası, analiz QR'ı</td></tr>
+        <tr><td>Kargo</td><td>Bal ve pekmez kargoyla; peynir sadece bizim teslimat günlerinde</td></tr>
+        <tr><td>Tahmini birim maliyet</td><td>~60–80 TL (300 adet)</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="details">
+    <p class="eyebrow">Kutunun içindekiler</p>
+    <h2 style="font-size:clamp(34px,4.6vw,56px)">Her kutuda aynı üç parça.</h2>
+    <div class="dgrid">
+      <div class="dcard">
+        <h3>Haftanın kartı (A6)</h3>
+        <div class="a6"><div><h4>Bu hafta kutuda</h4><ul><li>Mandalina · Seferihisar</li><li>Portakal · Köyceğiz</li><li>Nar · Antalya</li><li>Avokado · Alanya</li><li>Deveci armut · Bursa</li><li>Kivi · Yalova</li><li>Hurma · Aydın</li><li>Ayva · Sakarya</li></ul><p style="margin-top:8px;font-style:italic;font-family:var(--display);font-size:13px">"Portakalı sabah 7'de, çiğ kalkınca topladık." — Mehmet Usta, Köyceğiz</p></div><div style="display:grid;align-content:space-between;justify-items:end"><span style="font-family:var(--display);font-size:22px">tane<span style="color:var(--nar)">.</span></span><div class="qr" id="qr" aria-label="QR yer tutucu"></div></div></div>
+        <p>Ön yüz: içerik ve bir üreticinin cümlesi. QR, kutunun hazırlanış videosuna gider. Arka yüz: saklama ipuçları ve bir tarif.</p>
+      </div>
+      <div class="dcard">
+        <h3>Mühür + tazelik etiketi</h3>
+        <div class="seal"><span>No. 0127</span><b>31 saat</b><span>Köyceğiz 07:40 → Bostanlı 15:10</span></div>
+        <div class="seal" style="border-color:var(--yaprak)"><span>No. 0128</span><b>26 saat</b><span>Menemen 06:50 → Bornova 09:10</span></div>
+        <p>Kapaktan öne inen numaralı şerit, toplama saatini, bahçeyi ve teslim saatini taşır. "Taze" demek yerine saati yazar. Türkiye'de bunu yapan kutu yok. Boş kutuyu geri veren 30 TL kredi kazanır; kutu 3–4 kez döner.</p>
+      </div>
+      <div class="dcard">
+        <h3>Etiket ve dolgu</h3>
+        <div class="stickers">
+          <div class="st" style="background:var(--nar);color:var(--kabuk)"><div>tane.<small>meyve</small></div></div>
+          <div class="st" style="background:var(--yaprak);color:var(--kabuk)"><div>tane.<small>yeşil</small></div></div>
+          <div class="st" style="background:var(--bal);color:var(--murekkep)"><div>tane.<small>kiler</small></div></div>
+          <div class="st" style="background:var(--kabuk);color:var(--murekkep);border:1px solid var(--line)"><div style="font-size:15px;font-style:italic">elle<br>seçildi<small>teşekkürler</small></div></div>
+        </div>
+        <p>Yuvarlak etiketler pelürü kapatır. Dolgu kağıt talaş, plastik yok. Hassas meyveler kalıplı kağıt viyolde.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="details">
+    <p class="eyebrow">Kutu açılışı</p>
+    <h2 style="font-size:clamp(34px,4.6vw,56px)">Kameraya göre tasarlandı.</h2>
+    <div class="steps">
+      <div class="step"><span>1 · kapı</span><b>Mühürlü kutu</b><p>Renk ve numara ilk karede görünür.</p></div>
+      <div class="step"><span>2 · kapak</span><b>"Afiyet olsun."</b><p>Kapak içi yazısı kutu açıldığı an okunur.</p></div>
+      <div class="step"><span>3 · pelür</span><b>Etiketli pelür</b><p>Kağıt sesi ve etiket, videonun ASMR anı.</p></div>
+      <div class="step"><span>4 · kart</span><b>Haftanın kartı</b><p>İçerik, üretici ve QR.</p></div>
+      <div class="step"><span>5 · meyve</span><b>Tane tane dizili</b><p>Renk sırasıyla dizilir, üstten çekim için.</p></div>
+    </div>
+  </section>
+
+  <section class="details">
+    <p class="eyebrow">Logo sistemi</p>
+    <h2 style="font-size:clamp(34px,4.6vw,56px)">Bir isim, beş hat.</h2>
+    <div class="lockups">
+      <div class="lk" style="background:var(--murekkep);color:var(--kabuk)"><span class="s">ana marka</span><span class="w">tane<span style="color:var(--nar-in)">.</span></span></div>
+      <div class="lk" style="background:var(--nar);color:var(--kabuk)"><span class="s">meyve</span><span class="w">tane<span style="color:var(--nar-in)">.</span></span></div>
+      <div class="lk" style="background:var(--yaprak);color:var(--kabuk)"><span class="s">yeşil</span><span class="w">tane<span style="color:var(--yaprak-in)">.</span></span></div>
+      <div class="lk" style="background:var(--pekmez);color:var(--bal-in)"><span class="s" style="color:var(--bal)">kiler · yakında</span><span class="w">tane<span style="color:var(--bal)">.</span></span></div>
+      <div class="lk" style="background:linear-gradient(135deg,#FF8A7A,#FFD36E 55%,#9ADBB0);color:var(--murekkep)"><span class="s">su · ileride</span><span class="w">tane<span>.</span> su</span></div>
+    </div>
+  </section>
+
+  <footer>tane. ambalaj prototipleri v0.1 · ölçüler ve maliyetler matbaa teklifiyle netleşir · Kasım 2026</footer>
+</div>
+
+<script>
+// QR placeholder pattern (not a real code)
+(function(){ const q=document.getElementById('qr'); let s=7; const r=()=> (s=(s*9301+49297)%233280)/233280;
+  for(let y=0;y<9;y++)for(let x=0;x<9;x++){ const corner=(x<3&&y<3)||(x>5&&y<3)||(x<3&&y>5); const on=corner?!(x%2===1&&y%2===1&&(x===1||x===7)&&(y===1||y===7))&&!((x===1||x===7)&&(y===1||y===7)):r()>.5; const i=document.createElement('i'); if(!on)i.className='o'; q.appendChild(i);} })();
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.querySelectorAll('[data-stage]').forEach(st => {
+  const box = st.querySelector('.b3'), bo = st.querySelector('[data-open]'), bs = st.querySelector('[data-spin]');
+  let ry = parseFloat(getComputedStyle(box).getPropertyValue('--ry')) || -30, rx = -22, drag = null;
+  if (reduce){ box.classList.remove('spin'); bs.setAttribute('aria-pressed','false'); }
+  const apply = () => { box.style.setProperty('--ry', ry + 'deg'); box.style.setProperty('--rx', rx + 'deg'); };
+  const stopSpin = () => {
+    if (!box.classList.contains('spin')) return;
+    const m = new DOMMatrixReadOnly(getComputedStyle(box).transform);
+    ry = Math.atan2(-m.m13, m.m11) * 180 / Math.PI; box.classList.remove('spin'); bs.setAttribute('aria-pressed','false'); apply();
+  };
+  bo.addEventListener('click', () => { const o = !box.classList.contains('open'); box.classList.toggle('open', o); bo.setAttribute('aria-pressed', o); bo.textContent = o ? 'Kapağı kapat' : 'Kapağı aç';
+    if (o){ stopSpin(); rx = -42; apply(); } else { rx = -22; apply(); } });
+  bs.addEventListener('click', () => { if (box.classList.contains('spin')) stopSpin(); else { box.style.setProperty('--ry', ry + 'deg'); box.classList.add('spin'); bs.setAttribute('aria-pressed','true'); } });
+  st.addEventListener('pointerdown', e => { if (e.target.closest('button')) return; stopSpin(); drag = { x:e.clientX, y:e.clientY, ry, rx }; st.setPointerCapture(e.pointerId); });
+  st.addEventListener('pointermove', e => { if (!drag) return; ry = drag.ry + (e.clientX - drag.x) * .5; rx = Math.max(-70, Math.min(-5, drag.rx - (e.clientY - drag.y) * .3)); apply(); });
+  st.addEventListener('pointerup', () => drag = null); st.addEventListener('pointercancel', () => drag = null);
+});
+</script>
+
+</body>
+</html>
