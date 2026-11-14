@@ -6,8 +6,8 @@ Daldan kapına, 24 saatte. İzmir, Fethiye ve Antalya'da haftada bir gün, elle 
 
 | Dosya | Ne |
 | --- | --- |
-| `index.html` | Site: hazır kutular, kendi kutunu kur, kişiselleştirme, sepet ve WhatsApp siparişi |
-| `kutular/index.html` | Kutu ve ambalaj prototipleri (3D, açılır kapaklı) |
+| `index.html` | Site: hazır kutular, kendi kutunu kur, kişiselleştirme, yan ürünler, günlük, okul programı, sepet ve WhatsApp siparişi |
+| `kutular/index.html` | Kutu ve ambalaj prototipleri (3D, açılır kapaklı), teknik şartname ve açılım şeması |
 | `img/` | Ana sayfa fotoğrafları (bkz. `img/README.md`) |
 
 Site tek dosyadır, kurulum veya derleme gerektirmez.
@@ -19,7 +19,9 @@ Site tek dosyadır, kurulum veya derleme gerektirmez.
 1. `whatsapp`: sipariş numarası, başında 90, boşluksuz (ör. `905321234567`).
 2. Kutu fiyatları `BOXES`, ek ürünler `ADDONS`, kendi kutun ürünleri `OWN` içinde.
 3. `CITIES`: teslimat günleri, kapanış saatleri, semtler. `cap` o gün hazırlanabilecek kutu sayısı, `left` gerçekte kalan kutu. Siparişler geldikçe güncelle.
-4. Bu haftanın ürünleri ve Brix değerleri `WEEK` içinde. Brix değerleri şu an örnek; ölçüm yaptıkça değiştir.
+4. `social`: Instagram, YouTube ve TikTok adresleri. Boş bırakılan görünmez.
+5. `giftThreshold`: hediye eşiği (TL). `school.given`: bugüne kadar okullarda dağıtılan meyve paketi; gerçek sayıyı yaz.
+6. Bu haftanın ürünleri ve Brix değerleri `WEEK` içinde. Brix değerleri şu an örnek; ölçüm yaptıkça değiştir.
 
 ## Yayına alma
 
