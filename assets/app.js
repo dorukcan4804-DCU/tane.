@@ -1,11 +1,4 @@
 "use strict";
-/*GUARD*/
-/* Site başka bir sayfanın içine gömülürse açılmaz (clickjacking koruması). */
-if (window.top !== window.self) {
-  try { window.top.location = window.self.location; } catch (e) { document.documentElement.style.display = "none"; }
-}
-/*/GUARD*/
-
 /* =====================================================================
    AYARLAR — fiyatları, günleri ve bilgileri sadece buradan değiştir.
    ===================================================================== */

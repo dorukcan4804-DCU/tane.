@@ -40,7 +40,7 @@ Site statiktir: sunucu, veritabanı, üye girişi ve kart bilgisi yoktur.
 - Sayfa yalnızca kendi `assets/app.js` dosyasını çalıştırır (CSP); dışarıya veri göndermez.
 - Ziyaretçinin yazdığı her metin düz metin olarak basılır; alanların uzunluk sınırı ve telefon kontrolü vardır.
 - Tarayıcıda saklanan sepet açılışta doğrulanır; bozuk kayıt atılır.
-- Site başka bir sayfanın içine gömülürse açılmaz.
+- Site başka bir sayfanın içine gömülemez: Cloudflare Pages ya da Netlify'da `_headers` dosyası bunu engeller. (GitHub Pages bu dosyayı okumaz.)
 
 Sitenin dışında yapılacaklar:
 
