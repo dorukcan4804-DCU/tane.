@@ -1,60 +1,51 @@
 # tane.
 
-Daldan kapına, 24 saatte. İzmir, Fethiye ve Antalya'da haftada bir gün, elle seçilmiş meyve ve sebze kutuları.
+Tane tane seçildi. İzmir'de haftada iki gün kapına gelen meyve kutuları, egzotik meyveler, reçel, pekmez ve bal.
 
-## İçerik
+## Dosyalar
 
 | Dosya | Ne |
 | --- | --- |
-| `index.html` | Site: hazır kutular, kendi kutunu kur, yan ürünler, okul programı, sepet ve WhatsApp siparişi |
-| `assets/app.js` | Sitenin kodu ve ayarları (fiyatlar, şehirler, WhatsApp numarası) |
-| `assets/style.css` | Sitenin görünümü |
+| `index.html` | Ana sayfa: kutular, kendi kutun, kiler, Erzak Barı, sorular, sepet ve WhatsApp siparişi |
+| `vizyon.html` | Vizyon sayfası |
+| `assets/app.js` | Sitenin kodu ve **ayarları** (fiyatlar, ürünler, teslimat günleri, WhatsApp numarası) |
+| `assets/style.css` | Görünüm |
 | `_headers` | Güvenlik başlıkları (Cloudflare Pages ve Netlify'da kendiliğinden uygulanır) |
-| `kutular/index.html` | Kutu ve ambalaj prototipleri (3D, açılır kapaklı), teknik şartname ve açılım şeması |
-| `img/` | Ana sayfa fotoğrafları (bkz. `img/README.md`) |
+| `kutular/index.html` | Kutu ve ambalaj prototipleri |
+| `img/` | İleride gerçek fotoğraflar için |
 
-Kurulum veya derleme gerektirmez.
+Kurulum veya derleme gerekmez.
 
-## Yayına almadan önce
+## Ayarlar
 
-`assets/app.js` içinde `AYARLAR` yazan bölümü düzenle:
+`assets/app.js` dosyasının en üstündeki `AYARLAR` bölümünü düzenle:
 
 1. `whatsapp`: sipariş numarası, başında 90, boşluksuz (ör. `905321234567`).
-2. Kutu fiyatları `BOXES`, ek ürünler `ADDONS`, kendi kutun ürünleri `OWN` içinde.
-3. `CITIES`: teslimat günleri, kapanış saatleri, semtler. `cap` o gün hazırlanabilecek kutu sayısı, `left` gerçekte kalan kutu. Siparişler geldikçe güncelle.
-4. `social`: Instagram, YouTube ve TikTok adresleri. Boş bırakılan görünmez.
-5. `giftThreshold`: hediye eşiği (TL). `school.given`: bugüne kadar okullarda dağıtılan meyve paketi; gerçek sayıyı yaz.
-6. Bu haftanın ürünleri ve Brix değerleri `WEEK` içinde. Brix değerleri şu an örnek; ölçüm yaptıkça değiştir.
+2. `minOrder` (en az sepet, 1.250 TL) ve `ownMin` (kendi kutun en az tutarı, 1.500 TL). Bu iki sınır her teslimatın en az 500 TL kâr bırakması için konuldu; düşürmeden önce birim ekonomisine bak.
+3. `BOXES` (kutular), `CATALOG` (kendi kutun ürünleri), `KILER` (reçel, pekmez, bal). O hafta olmayan ürüne `off:true` yaz, "bu hafta yok" görünür.
+4. `days`: teslimat günleri ve kapanış saatleri. `left` o gün gerçekte kalan kapasitedir; dolunca `0` yap.
+5. `erzak.current` ve `erzak.given`: Erzak Barı'nın gerçek sayıları. Uydurma sayı yazılmaz.
+6. `social`: Instagram, YouTube, TikTok adresleri (`https://` ile). Boş olan görünmez.
 
 ## Yayına alma
 
-**GitHub Pages:** Settings → Pages → Source: `Deploy from a branch`, Branch: `main`, klasör `/ (root)`. Birkaç dakika sonra site açılır.
+**Önerilen: Cloudflare Pages.** Repoyu bağla, derleme ayarı boş kalsın. `_headers` dosyasındaki güvenlik başlıkları burada çalışır. Alan adını Cloudflare'de bağla.
 
-**Alan adı bağlama:** Alan adını aldıktan sonra Settings → Pages → Custom domain alanına yaz (ör. `tane.com.tr`). Alan adı sağlayıcında GitHub'ın gösterdiği DNS kayıtlarını ekle ve "Enforce HTTPS"i aç.
-
-**Önerilen: Cloudflare Pages.** Repo bağlanır, ayar gerekmez. `_headers` dosyasındaki güvenlik başlıkları (çerçeve içine gömülmeyi engelleme, HTTPS zorlama) sadece burada ve Netlify'da çalışır; GitHub Pages bu dosyayı okumaz.
-
-## Ödeme
-
-Sipariş şu an WhatsApp'a hazır mesaj olarak düşer; ödeme kapıda ya da ödeme linkiyle alınır. Kartla ödeme için şirket ve iyzico ya da PayTR hesabı açıldığında sepetteki gönder butonu ödeme linkine bağlanır.
-
-## Yasal metinler
-
-Mesafeli satış sözleşmesi, ön bilgilendirme formu, KVKK ve çerez metinleri sitede yer tutucu olarak duruyor. Yayından önce avukatla hazırlanıp `LEGAL` bölümüne konmalı.
+GitHub Pages da çalışır (Settings → Pages → `main` / root), ama `_headers` dosyasını okumaz.
 
 ## Güvenlik
 
-Site statiktir: sunucu, veritabanı, üye girişi ve kart bilgisi yoktur. Alınan önlemler:
+Site statiktir: sunucu, veritabanı, üye girişi ve kart bilgisi yoktur.
 
-- **İçerik güvenlik politikası (CSP):** Sayfa yalnızca kendi `assets/` klasöründeki kodu çalıştırır. Dışarıdan eklenen ya da sayfaya sızdırılan kod çalışmaz; site hiçbir yere veri göndermez.
-- **Girdi temizliği:** Ziyaretçinin yazdığı her metin (ad, adres, not, mühür yazısı) ekrana düz metin olarak basılır. Alanların uzunluk sınırı ve telefon kontrolü vardır.
-- **Saklanan sepet:** Tarayıcıda tutulan sepet açılışta doğrulanır; biçimi tutmayan kayıt atılır.
-- **Gömülme koruması:** Site başka bir sayfanın içine gömülürse açılmaz.
+- Sayfa yalnızca kendi `assets/app.js` dosyasını çalıştırır (CSP); dışarıya veri göndermez.
+- Ziyaretçinin yazdığı her metin düz metin olarak basılır; alanların uzunluk sınırı ve telefon kontrolü vardır.
+- Tarayıcıda saklanan sepet açılışta doğrulanır; bozuk kayıt atılır.
+- Site başka bir sayfanın içine gömülürse açılmaz.
 
-Sitenin dışında yapılması gerekenler:
+Sitenin dışında yapılacaklar:
 
-1. GitHub, alan adı, e-posta ve sosyal medya hesaplarında iki adımlı doğrulamayı aç. Bir sitenin ele geçirilmesinin en yaygın yolu bu hesaplardır.
-2. GitHub'da `main` dalına koruma koy (Settings → Branches) ve repoya yazma yetkisini sadece gerekli kişilere ver.
-3. Bu repo herkese açıktır: şifre, API anahtarı ya da müşteri bilgisi asla buraya konmaz.
-4. **Fiyatı siparişte doğrula.** Sipariş mesajındaki tutar ziyaretçinin tarayıcısında hesaplanır ve değiştirilebilir. Ödeme linkini gönderirken tutarı kendi fiyat listenle kontrol et.
-5. Kartla ödemeye geçince kart bilgisi bu sitede alınmaz; iyzico ya da PayTR'nin kendi ödeme sayfası kullanılır.
+1. GitHub, alan adı, e-posta ve sosyal medya hesaplarında iki adımlı doğrulamayı aç.
+2. Settings → Branches'ta `main` dalına koruma koy; yazma yetkisini kısıtla.
+3. Bu repo herkese açık: şifre, API anahtarı ya da müşteri bilgisi asla buraya konmaz.
+4. Sipariş mesajındaki tutarı ödeme linkini göndermeden önce fiyat listenle kontrol et; tutar ziyaretçinin tarayıcısında hesaplanır.
+5. Kartlı ödemeye geçince kart bilgisi bu sitede alınmaz; ödeme kuruluşunun kendi sayfası kullanılır.

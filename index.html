@@ -6,142 +6,116 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>tane. Online Manav</title>
-<meta name="description" content="tane. — Daldan kapına 24 saatte. İzmir, Fethiye ve Antalya'da haftada bir gün, elle seçilmiş meyve ve sebze kutuları.">
+<meta name="description" content="tane. — İzmir'de haftada iki gün kapına gelen, tane tane seçilmiş meyve kutuları, egzotik meyveler, reçel, pekmez ve bal.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Manrope:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Manrope:wght@400;600;700;800&display=swap">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-<p class="bar" id="bar">İzmir · <b>Pazartesi 20:00</b>'ye kadar sipariş ver, Çarşamba kapında · Teslimat dahil</p>
+<!--BODY-->
+<p class="bar" id="bar">İzmir · <b>Pazartesi 20:00</b>'ye kadar sipariş ver, Çarşamba kapında · Teslimat ücretsiz</p>
 <header class="top">
   <div class="wrap">
     <a href="#top" class="logo" aria-label="tane. ana sayfa">tane<i>.</i></a>
-    <div class="switch" role="group" aria-label="Ürün hattı">
-      <span class="pill"></span>
-      <button id="sw-meyve" data-set-line="meyve" aria-pressed="true">Meyve</button>
-      <button id="sw-yesil" data-set-line="yesil" aria-pressed="false">Yeşil</button>
-    </div>
-    <nav class="links"><a href="#kutular">Kutular</a><a href="#nasil">Nasıl çalışır</a><a href="#okul">Okula bir tane</a><a href="#sss">Sorular</a></nav>
+    <nav class="links" aria-label="Ana menü"><a href="#kutular">Kutular</a><a href="#kiler">Kiler</a><a href="#erzak">Erzak Barı</a><a href="vizyon.html">Vizyon</a><a href="#sorular">Sorular</a></nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Menüyü aç">Menü</button>
     <button class="cart-btn" id="cartBtn" aria-label="Sepeti aç">Sepet <b id="cartCount">0</b></button>
   </div>
 </header>
 
 <main id="top">
-  <section class="hero" id="hero">
-    <div class="hero-photo" id="heroPhoto"></div>
-    <div class="hero-art" aria-hidden="true" id="heroArt"></div>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="hello" id="hello" hidden></p>
+        <p class="eyebrow">İzmir · haftada iki gün</p>
+        <h1>Tane tane <em>seçildi.</em></h1>
+        <p class="lead">Mevsim meyvesinden ejder meyvesine, reçelden çam balına. Siparişin kadar toplanır, elle kutulanır, ertesi gün kendi aracımızla kapına gelir.</p>
+        <div class="ctas"><a class="btn" href="#kutular">Kutunu seç</a><button class="btn line" id="openQuiz">Sana hangi kutu?</button></div>
+      </div>
+      <div class="hero-art" id="heroArt" aria-hidden="true"></div>
+    </div>
     <div class="wrap">
-      <p class="hello" id="hello"></p>
-      <p class="kicker">İzmir · Fethiye · Antalya · haftada bir gün</p>
-      <h1 id="h1">Daldan kapına, <em>24 saatte.</em></h1>
-      <p class="lead" id="lead">Salı sabahı bahçedeydi, Çarşamba kapında.</p>
-      <div class="ctas"><a class="btn warm" href="#kutular">Kutunu seç</a><button class="btn line" id="openQuiz">Sana hangi kutu?</button></div>
+      <div class="trust">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span><b>Teslimat ücretsiz</b><span class="muted">Kargo yok, kendi aracımızla, saat aralığıyla</span></span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg><span><b>Tane garantisi</b><span class="muted">Beğenmediğin her tane sonraki kutuda bedava</span></span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5M20 12a8 8 0 0 1-14 5"/><path d="M18 3v4h-4M6 21v-4h4"/></svg><span><b>Bağlılık yok</b><span class="muted">Abonelikte istediğin hafta atla</span></span></div>
+      </div>
     </div>
   </section>
-
-  <div class="wrap">
-    <div class="week-card reveal" id="weekCard">
-      <div>
-        <div class="tabs" role="group" aria-label="Şehir" id="cityTabs"></div>
-        <div class="wk-info"><b id="wkDay">Çarşamba · 10:00–20:00</b><span class="muted" id="wkCut">Sipariş kapanışı Pazartesi 20:00</span></div>
-      </div>
-      <div class="cap">
-        <div class="row"><span>Bu haftanın kutuları</span><span class="num" id="capTxt"></span></div>
-        <div class="meter"><i id="capBar" style="width:0%"></i></div>
-        <span class="count num" id="countdown"></span>
-      </div>
-      <a class="btn" href="#kutular">Kutunu ayır</a>
-    </div>
-    <div class="trust">
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span><b>Teslimat dahil</b><span class="muted">Kendi aracımızla, saat aralığıyla</span></span></div>
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg><span><b>Tane garantisi</b><span class="muted">Beğenmediğin her tane, sonraki kutuda bedava</span></span></div>
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12a8 8 0 0 1 14-5M20 12a8 8 0 0 1-14 5"/><path d="M18 3v4h-4M6 21v-4h4"/></svg><span><b>Bağlılık yok</b><span class="muted">İstediğin hafta atla, istediğin zaman bırak</span></span></div>
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 19c8 0 14-6 14-14C11 5 5 11 5 19z"/><path d="M5 19l7-7"/></svg><span><b>Plastik yok</b><span class="muted">Kutunu geri ver, 30 TL kredi kazan</span></span></div>
-    </div>
-  </div>
 
   <section id="kutular">
     <div class="wrap">
       <div class="head reveal">
-        <div><p class="eyebrow" id="boxEyebrow">Meyve kutuları</p><h2 id="boxTitle">Üç boy, bir standart.</h2></div>
-        <div class="freq" role="group" aria-label="Sıklık" id="freq"></div>
+        <div><p class="eyebrow">Kutular</p><h2>Üç kutu, bir standart.</h2></div>
+        <div class="seg-inline" role="group" aria-label="Sıklık" id="freq"></div>
       </div>
       <div class="boxes" id="boxes"></div>
-      <div id="extraRow"></div>
+      <div class="own reveal">
+        <div class="ico" id="ownIco" aria-hidden="true"></div>
+        <div><h3>Kendi kutunu kur.</h3><p class="muted" style="margin-top:6px" id="ownTxt">32 meyve ve sebzeden seç: mandalinadan ejder meyvesine. Kutun gözünün önünde dolsun.</p></div>
+        <button class="btn" id="openOwn">Kutunu doldur</button>
+      </div>
+      <p class="note" id="minNote"></p>
     </div>
   </section>
 
   <section id="nasil">
-    <div class="wrap">
-      <div class="head reveal"><div><p class="eyebrow">Nasıl çalışır</p><h2>Stok yok. Bekleme yok.</h2></div><p class="muted">Siparişin kadar toplarız. Bu yüzden haftada bir gün geliyoruz ve bu yüzden bu kadar taze.</p></div>
-      <div class="how" id="how">
-        <div class="s"><span class="d">Pazartesi</span><b>Sipariş kapanır</b><p>İzmir'de 20:00'de. Tedarikçilerle haftanın listesini belirleriz.</p></div>
-        <div class="s"><span class="d">Salı sabahı</span><b>Dalından</b><p>Tanıdığımız bahçelerden sadece sipariş kadar toplanır.</p></div>
-        <div class="s"><span class="d">Salı akşamı</span><b>Elle kutulama</b><p>Her tane tek tek seçilir, kutu mühürlenir, tazelik etiketi basılır.</p></div>
-        <div class="s"><span class="d">Çarşamba</span><b>Kapında</b><p>Seçtiğin saat aralığında biz getiririz. Yola çıkınca haber veririz.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="tazelik">
-    <div class="wrap fresh">
+    <div class="wrap how">
       <div class="reveal">
-        <p class="eyebrow">Tazelik etiketi</p>
-        <h2>"Taze" demiyoruz. Saatini yazıyoruz.</h2>
-        <p class="muted" style="margin:16px 0 26px;max-width:520px">Her kutunun mührüne toplandığı bahçe, toplama saati ve kapına geldiği saat basılır. Kutuyu açmadan, içindekilerin kaç saat önce dalında olduğunu görürsün.</p>
-        <p class="muted" style="max-width:520px">Kutun numaralı mühürle kapalı gelir. İçinden haftanın kartı çıkar: hangi meyve bugün, hangisi Cuma yenecek.</p>
+        <p class="eyebrow">Nasıl çalışır</p>
+        <h2>Stok yok. Bekleme yok.</h2>
+        <div class="steps">
+          <div class="step"><span class="n">1</span><div><b>Sipariş ver</b><p class="muted" id="stepTxt1">Çarşamba için Pazartesi 20:00'ye, Cumartesi için Perşembe 20:00'ye kadar.</p></div></div>
+          <div class="step"><span class="n">2</span><div><b>Sabah toplanır</b><p class="muted">Tanıdığımız bahçelerden ve halden yalnızca sipariş kadar alınır. Her tane elle seçilir.</p></div></div>
+          <div class="step"><span class="n">3</span><div><b>Kapında</b><p class="muted">Seçtiğin saat aralığında kendi aracımızla getiririz. Kutun numaralı mühürle kapalı gelir.</p></div></div>
+        </div>
       </div>
       <div class="label reveal" aria-label="Örnek tazelik etiketi">
-        <div class="t"><span style="text-transform:none;letter-spacing:-.03em;font-family:var(--display);font-weight:500;color:#1F1A17;font-size:26px">tane<span style="color:#9E2B3A">.</span></span><span>No. <span class="num">0127</span></span></div>
-        <div class="route">
-          <div><b id="lblFrom">Köyceğiz</b>Toplandı · Salı 07:40</div>
-          <span class="arrow">→</span>
-          <div><b id="lblTo">Bostanlı</b>Kapında · Çarşamba 15:10</div>
-        </div>
-        <div class="hours"><b class="num" id="hours">31</b><span>saat önce dalındaydı.<br><span style="color:#6E6763;font-size:13px" id="lblBrix">Mandalina 12,4 Brix · elle seçildi</span></span></div>
+        <div class="t"><span>tane<span style="color:#9E2B3A">.</span></span><span>No. 0127</span></div>
+        <div class="route"><div><b>Seferihisar</b>Toplandı · Salı 07:40</div><i>→</i><div><b>Bostanlı</b>Kapında · Çarşamba 15:10</div></div>
+        <div class="hours"><b class="num" id="hours">31</b><span>saat önce dalındaydı.<br><span style="color:#6E6763;font-size:13px">Her kutunun mühründe bu etiket var.</span></span></div>
         <div class="stamp">Elle<br>seçildi</div>
       </div>
     </div>
   </section>
 
-  <section id="yanina">
+  <section id="kiler">
     <div class="wrap">
-      <div class="head reveal"><div><p class="eyebrow">Kutunun yanına</p><h2>Aynı kapıya, aynı gün.</h2></div><p class="muted">Kutunla birlikte gelir, ayrı teslimat ücreti yok. Tamamı kutunu hazırlarken karşına çıkar.</p></div>
-      <div class="side" id="sideGrid"></div>
-      <p class="giftline" id="giftLine"></p>
+      <div class="head reveal"><div><p class="eyebrow">Kiler</p><h2>Reçel, pekmez, bal.</h2></div><p class="muted">Küçük üreticilerden, katkısız. Kutunla birlikte gelir, ayrı teslimat ücreti yok.</p></div>
+      <div class="kiler" id="kilerGrid"></div>
     </div>
   </section>
 
-  <section id="okul">
+  <section id="erzak">
     <div class="wrap">
-      <div class="school reveal">
-        <div style="display:grid;gap:14px;justify-items:start">
-          <p class="eyebrow">Okula bir tane</p>
-          <h2>Her kutu, bir çocuğa bir meyve.</h2>
-          <p class="muted" style="max-width:520px" id="schoolTxt"></p>
-          <p><span class="stat num" id="schoolStat"></span><br><span class="muted" id="schoolSub"></span></p>
+      <div class="erzak reveal">
+        <div>
+          <p class="eyebrow">Erzak Barı</p>
+          <h2>Her sipariş, bir aileye erzak.</h2>
+          <p class="muted" style="margin-top:16px;max-width:460px" id="erzakTxt"></p>
         </div>
-        <div class="cups" aria-hidden="true">
-          <svg viewBox="0 0 100 100"><use href="#i-mandalina"/></svg><svg viewBox="0 0 100 100"><use href="#i-elma"/></svg><svg viewBox="0 0 100 100"><use href="#i-armut"/></svg>
+        <div class="erzak-bar">
+          <div class="top"><span>Bu barın dolumu</span><b class="num" id="erzakNum">0 / 100</b></div>
+          <div class="track"><i id="erzakFill"></i></div>
+          <small id="erzakSub"></small>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="sss">
+  <section id="sorular">
     <div class="wrap">
       <div class="head reveal"><div><p class="eyebrow">Sorular</p><h2>Merak ettiklerin.</h2></div></div>
       <div class="faq">
-        <details><summary>Kutuda tam olarak ne var?</summary><p>Her hafta değişir; "Bu hafta kutuda" listesinde görürsün. Sofra kutusunda 13+ çeşit, 7–8 kg mevsim meyvesi olur.</p></details>
-        <details><summary>İstemediğim bir şeyi çıkarabilir miyim?</summary><p>Evet, kutunu hazırlarken en fazla 3 ürünü çıkarabilirsin. Yerine aynı değerde başka bir ürün koyarız.</p></details>
-        <details><summary>Meyveler yıkanmış mı geliyor?</summary><p>Hayır, bilerek yıkamıyoruz. Islak meyve kutuda küflenir. Kuru bezle temizleyip kutuluyoruz. Yemeden önce yıka.</p></details>
-        <details><summary>Bir ürün kötü çıkarsa?</summary><p>Tane garantisi: 24 saat içinde fotoğrafını WhatsApp'tan gönder, sonraki kutuna ücretsiz ekleriz ya da bedelini iade ederiz.</p></details>
-        <details><summary>Evde yoksam?</summary><p>Kapına ya da kapıcına bırakır, fotoğrafını göndeririz.</p></details>
-        <details><summary>Aboneliği nasıl durdururum?</summary><p>Kapanış saatine kadar WhatsApp'tan yazman yeterli. İstediğin haftayı atla, istediğin zaman bırak.</p></details>
-        <details><summary>Ofisimize kutu alabilir miyiz?</summary><p>Evet. Tek adrese 5 kutu ve üzeri için kurumsal fiyat, fatura ve sabit teslimat saati veriyoruz. WhatsApp'tan yazman yeterli.</p></details>
-        <details><summary>Arkadaşımı getirirsem ne olur?</summary><p>Arkadaşın sipariş verirken senin adını yazar. İlk kutusu teslim edilince ikinizin de sonraki kutusundan 100 TL düşer.</p></details>
-        <details><summary>İade hakkım var mı?</summary><p>Taze ürünler çabuk bozulabilen ürün olduğundan yasal cayma hakkı kapsamında değildir. Memnun kalmadığın her ürün için Tane garantisi geçerlidir.</p></details>
+        <details class="q"><summary>Kutuda tam olarak ne var?</summary><p>Her hafta değişir, mevsimin en iyileri girer. İçerik listesi kutudaki kartta yazar. Sofra kutusunda 13+ çeşit, 7–8 kg meyve olur.</p></details>
+        <details class="q"><summary>İstemediğim bir şeyi çıkarabilir miyim?</summary><p>Evet, kutunu hazırlarken en fazla 3 ürünü çıkarabilirsin; yerine aynı değerde başka ürün koyarız. Her şeyi kendin seçmek istersen "Kendi kutunu kur"u kullan.</p></details>
+        <details class="q"><summary>Teslimat gerçekten ücretsiz mi?</summary><p>Evet. Kendi aracımızla getiriyoruz. Teslimat için en az sepet tutarı 1.250 TL.</p></details>
+        <details class="q"><summary>Meyveler yıkanmış mı geliyor?</summary><p>Hayır, bilerek yıkamıyoruz; ıslak meyve kutuda küflenir. Kuru bezle temizleyip kutuluyoruz. Yemeden önce yıka.</p></details>
+        <details class="q"><summary>Bir ürün kötü çıkarsa?</summary><p>24 saat içinde fotoğrafını WhatsApp'tan gönder. Sonraki kutuna ücretsiz ekleriz ya da bedelini iade ederiz.</p></details>
+        <details class="q"><summary>Ofisimize kutu alabilir miyiz?</summary><p>Evet. Tek adrese 5 kutu ve üzeri için kurumsal fiyat, fatura ve sabit teslimat günü veriyoruz. WhatsApp'tan yazman yeterli.</p></details>
+        <details class="q"><summary>İade hakkım var mı?</summary><p>Taze ürünler çabuk bozulabilen ürün olduğundan yasal cayma hakkı kapsamında değildir. Memnun kalmadığın her ürün için Tane garantisi geçerlidir.</p></details>
       </div>
     </div>
   </section>
@@ -149,105 +123,75 @@
 
 <footer>
   <div class="wrap">
-    <div><div class="big">tane<i>.</i></div><p style="margin-top:14px;color:var(--hero-mute)">Daldan kapına. © 2026 · İzmir · Fethiye · Antalya<br>Yakında: tane. kiler · bal, pekmez, peynir</p></div>
+    <div><div class="big">tane<i>.</i></div><p class="muted" style="margin-top:16px">Tane tane seçildi. © 2026 · İzmir<br>Yakında: tane. su</p></div>
     <nav aria-label="Alt menü">
-      <button class="linklike" data-legal="mesafeli">Mesafeli satış sözleşmesi</button>
-      <button class="linklike" data-legal="kvkk">KVKK aydınlatma metni</button>
-      <button class="linklike" data-legal="cerez">Çerez politikası</button>
+      <a href="vizyon.html">Vizyon</a>
+      <button data-legal="mesafeli">Mesafeli satış sözleşmesi</button>
+      <button data-legal="kvkk">KVKK</button>
+      <button data-legal="cerez">Çerezler</button>
       <span>WhatsApp: <span id="waText"></span></span>
-      <span class="soc" id="footSoc"></span>
+      <span id="footSoc"></span>
     </nav>
   </div>
 </footer>
 
 <div class="scrim" id="scrim"></div>
 
+<aside class="sheet" id="menu" aria-label="Menü">
+  <div class="sh-head"><span class="logo">tane<i>.</i></span><button class="xbtn" data-close aria-label="Kapat">×</button></div>
+  <div class="sh-body"><nav class="mnav"><a href="#kutular" data-close>Kutular</a><a href="#kiler" data-close>Kiler</a><a href="#erzak" data-close>Erzak Barı</a><a href="vizyon.html">Vizyon</a><a href="#sorular" data-close>Sorular</a></nav></div>
+</aside>
+
 <aside class="sheet" id="cfg" aria-label="Kutunu hazırla">
-  <div class="sh-head"><div><p class="eyebrow">Kutunu hazırla</p><h3 id="cfgTitle">Sofra</h3></div><button class="xbtn" data-closesheet aria-label="Kapat">×</button></div>
+  <div class="sh-head"><div><p class="eyebrow" style="margin:0">Kutunu hazırla</p><h3 id="cfgTitle">Sofra</h3></div><button class="xbtn" data-close aria-label="Kapat">×</button></div>
   <div class="sh-body">
     <div class="preview" id="cfgPreview"></div>
-    <div id="sizeWrap"><p class="sub">Boy</p><div class="seg" id="cfgSize" style="margin-top:8px"></div></div>
-    <div><p class="sub">Sıklık</p><div class="seg" id="cfgFreq" style="margin-top:8px"></div></div>
-    <label class="toggle" id="vegToggle" for="cfgVeg"><input type="checkbox" id="cfgVeg"><span><b>Sebze kutusu da ekle</b><small>6–7 kg, 12+ çeşit. Aynı teslimatla gelir.</small></span><span class="p"><s class="muted" style="font-weight:600;margin-right:4px">749</s>599 TL</span></label>
-    <div><p class="sub">Kutuna ekle</p><div class="addons" id="cfgAdd" style="margin-top:8px"></div></div>
-    <details class="more"><summary>Kişiselleştir <span class="muted" style="font-weight:600">· isteğe bağlı</span></summary>
-      <div style="display:grid;gap:14px;margin-top:14px">
-        <div><p class="sub">İstemediklerin · en fazla 3</p><div class="chips" id="cfgOut" style="margin-top:8px"></div></div>
-        <div><p class="sub">Favorilerin · en fazla 2</p><div class="chips" id="cfgFav" style="margin-top:8px"></div></div>
-        <div><p class="sub">Olgunluk</p><div class="seg" id="cfgRipe" style="margin-top:8px;grid-template-columns:1fr 1fr"></div></div>
-        <div><p class="sub">Kutunun karakteri</p><div class="chips" id="cfgStyle" style="margin-top:8px"></div></div>
-        <div><p class="sub">Tat</p><div class="seg" id="cfgTaste" style="margin-top:8px"></div></div>
-        <div><p class="sub">Boy</p><div class="seg" id="cfgSizePref" style="margin-top:8px"></div></div>
-      </div>
-    </details>
-    <details class="more" id="giftDet"><summary>Kutunu kişiselleştir <span class="muted" style="font-weight:600">· isim, hediye, not</span></summary>
-      <div style="display:grid;gap:12px;margin-top:14px">
-        <label class="field" for="cfgSeal">Mühüre yazalım <span class="muted" style="font-weight:600">· ücretsiz</span><input id="cfgSeal" maxlength="24" placeholder="Örneğin: Elif'in kutusu"></label>
-        <label class="check" for="cfgGift"><input type="checkbox" id="cfgGift"> Hediye paketi: kurdele ve mühürlü kapak (+150 TL)</label>
-        <label class="field" for="cfgNote">Not kartına yazalım<textarea id="cfgNote" maxlength="180" placeholder="Yeni evine hoş geldin, bol taneli günler!"></textarea></label>
-      </div>
-    </details>
+    <div><p class="sub">Kutu</p><div class="seg" id="cfgSize"></div></div>
+    <div><p class="sub">Sıklık</p><div class="seg" id="cfgFreq"></div></div>
+    <label class="toggle" id="vegToggle" for="cfgVeg"><input type="checkbox" id="cfgVeg"><span><b>Sebze de ekle</b><small>6–7 kg, 12+ çeşit, aynı teslimatla</small></span><span class="p" id="vegPrice"></span></label>
+    <div><p class="sub">Kilerden ekle</p><div class="rows" id="cfgKiler"></div></div>
+    <details class="more"><summary>Kişiselleştir</summary><div>
+      <div><p class="sub">İstemediklerin · en fazla 3</p><div class="chips" id="cfgOut"></div></div>
+      <div><p class="sub">Tat</p><div class="seg" id="cfgTaste"></div></div>
+      <div><p class="sub">Olgunluk</p><div class="seg two-col" id="cfgRipe"></div></div>
+    </div></details>
+    <details class="more" id="giftDet"><summary>Hediye mi?</summary><div>
+      <label class="check" for="cfgGift"><input type="checkbox" id="cfgGift"><span>Hediye paketi: kurdele, mühür ve kart (<span id="giftPrice"></span>)</span></label>
+      <label class="field" for="cfgNote">Kartına yazalım<textarea id="cfgNote" maxlength="180" placeholder="Yeni evine hoş geldin!"></textarea></label>
+    </div></details>
   </div>
   <div class="sh-foot">
-    <div class="total"><span><span id="cfgFreqLbl">Tek sefer</span><br><small class="muted" id="cfgPer"></small></span><b id="cfgTotal">0 TL</b></div>
-    <button class="btn" id="cfgAddBtn">Sepete ekle</button>
-    <div class="guarantee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>Tane garantisi: beğenmediğin her tane sonraki kutuda bedava.</div>
+    <div class="total"><span id="cfgFreqLbl">Tek sefer</span><b id="cfgTotal">0 TL</b></div>
+    <button class="btn block" id="cfgAdd">Sepete ekle</button>
   </div>
 </aside>
 
 <aside class="sheet" id="own" aria-label="Kendi kutunu kur">
-  <div class="sh-head"><div><p class="eyebrow">Sıfırdan</p><h3>Kendi kutunu kur</h3></div><button class="xbtn" data-closesheet aria-label="Kapat">×</button></div>
+  <div class="sh-head"><div><p class="eyebrow" style="margin:0">Kendi kutun</p><h3>Tane tane seç</h3></div><button class="xbtn" data-close aria-label="Kapat">×</button></div>
   <div class="sh-body">
     <div class="preview" id="ownPreview"></div>
-    <div class="seg" id="ownTabs" style="grid-template-columns:1fr 1fr"></div>
-    <div id="ownList"></div>
-    <div class="compare" id="ownCompare" hidden></div>
-    <details class="more"><summary>Kutunu kişiselleştir <span class="muted" style="font-weight:600">· isim, olgunluk, not</span></summary>
-      <div style="display:grid;gap:12px;margin-top:14px">
-        <label class="field" for="ownSeal">Mühüre yazalım <span class="muted" style="font-weight:600">· ücretsiz</span><input id="ownSeal" maxlength="24" placeholder="Örneğin: Ofis mutfağı"></label>
-        <div><p class="sub">Olgunluk</p><div class="seg" id="ownRipe" style="margin-top:8px;grid-template-columns:1fr 1fr"></div></div>
-        <label class="check" for="ownGift"><input type="checkbox" id="ownGift"> Hediye paketi: kurdele ve mühürlü kapak (+150 TL)</label>
-        <label class="field" for="ownNote">Not kartına yazalım<textarea id="ownNote" maxlength="180" placeholder="Afiyet olsun!"></textarea></label>
-      </div>
-    </details>
+    <div class="minline"><div style="display:flex;justify-content:space-between;gap:8px"><span id="ownMinTxt"></span><span class="num" id="ownKg"></span></div><div class="meter"><i id="ownBar"></i></div></div>
+    <div class="tabs" role="group" aria-label="Kategori" id="ownTabs"><button data-tab="meyve" aria-pressed="true">Meyve</button><button data-tab="egzotik" aria-pressed="false">Egzotik</button><button data-tab="sebze" aria-pressed="false">Sebze</button></div>
+    <div class="rows" id="ownList"></div>
+    <div><p class="sub">Olgunluk</p><div class="seg two-col" id="ownRipe"></div></div>
+    <label class="field" for="ownNote">Not <span class="muted" style="font-weight:600">· isteğe bağlı</span><textarea id="ownNote" maxlength="180" placeholder="Avokadolar Cuma'ya hazır olsun"></textarea></label>
   </div>
   <div class="sh-foot">
-    <div class="total"><span><span id="ownKg">0 kg</span><br><small class="muted" id="ownFee"></small></span><b id="ownTotal">0 TL</b></div>
-    <p class="warn" id="ownWarn"></p>
-    <button class="btn" id="ownAdd">Sepete ekle</button>
+    <div class="total"><span id="ownCount">0 ürün</span><b id="ownTotal">0 TL</b></div>
+    <button class="btn block" id="ownAdd" disabled>Sepete ekle</button>
   </div>
 </aside>
 
 <aside class="sheet" id="cart" aria-label="Sepet">
-  <div class="sh-head"><div style="flex:1"><h3>Sepetin</h3><div class="stepper" style="margin-top:10px"><span class="on" id="st1">1 · Kutular</span><span id="st2">2 · Teslimat</span><span id="st3">3 · Gönder</span></div></div><button class="xbtn" data-closesheet aria-label="Kapat">×</button></div>
+  <div class="sh-head"><div style="flex:1"><h3>Sepetin</h3><div class="stepper"><span class="on" id="st1">1 · Sepet</span><span id="st2">2 · Teslimat</span><span id="st3">3 · Gönder</span></div></div><button class="xbtn" data-close aria-label="Kapat">×</button></div>
   <div class="sh-body" id="cartBody"></div>
   <div class="sh-foot" id="cartFoot"></div>
 </aside>
 
 <div class="modal" id="quiz" role="dialog" aria-modal="true" aria-labelledby="qTitle"><div class="card" id="quizCard"></div></div>
-<div class="modal" id="legal" role="dialog" aria-modal="true" aria-labelledby="lTitle"><div class="card"><h2 id="lTitle" style="font-size:32px;margin-bottom:12px"></h2><p class="muted" id="lBody"></p><p style="margin-top:20px"><button class="btn sm" data-close>Kapat</button></p></div></div>
-<div class="toast" id="toast" role="status"></div>
-
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <symbol id="i-mandalina" viewBox="0 0 100 100"><circle cx="50" cy="54" r="34" fill="#E8832A"/><path d="M50 22 C58 10 72 10 78 14 C70 22 60 24 50 22Z" fill="#3F6B35"/><circle cx="40" cy="46" r="6" fill="#F4A55A"/></symbol>
-  <symbol id="i-nar" viewBox="0 0 100 100"><circle cx="50" cy="56" r="34" fill="#B5263A"/><path d="M40 24 L44 14 L50 22 L56 14 L60 24 Z" fill="#8A1A2B"/><circle cx="38" cy="46" r="7" fill="#D9475A" opacity=".7"/></symbol>
-  <symbol id="i-avokado" viewBox="0 0 100 100"><path d="M50 12 C66 12 78 48 78 64 C78 82 66 90 50 90 C34 90 22 82 22 64 C22 48 34 12 50 12Z" fill="#3E5A2A"/><path d="M50 22 C62 22 70 50 70 64 C70 78 61 83 50 83 C39 83 30 78 30 64 C30 50 38 22 50 22Z" fill="#C7D27A"/><circle cx="50" cy="64" r="11" fill="#7A4A26"/></symbol>
-  <symbol id="i-armut" viewBox="0 0 100 100"><path d="M50 18 C40 18 40 36 34 48 C24 66 30 88 50 88 C70 88 76 66 66 48 C60 36 60 18 50 18Z" fill="#C9B544"/><rect x="48" y="8" width="4" height="12" rx="2" fill="#5A3A1A"/></symbol>
-  <symbol id="i-kivi" viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="#7A5A33"/><circle cx="50" cy="50" r="30" fill="#8DB33E"/><circle cx="50" cy="50" r="9" fill="#F1EFC8"/></symbol>
-  <symbol id="i-hurma" viewBox="0 0 100 100"><ellipse cx="50" cy="58" rx="33" ry="28" fill="#E36A1F"/><path d="M30 34 L50 40 L70 34 L62 28 L50 32 L38 28Z" fill="#4E5A2A"/></symbol>
-  <symbol id="i-elma" viewBox="0 0 100 100"><path d="M50 30 C30 18 14 34 18 56 C22 80 40 90 50 84 C60 90 78 80 82 56 C86 34 70 18 50 30Z" fill="#C3302C"/><path d="M52 30 C54 20 60 14 66 14" stroke="#5A3A1A" stroke-width="4" fill="none"/></symbol>
-  <symbol id="i-domates" viewBox="0 0 100 100"><ellipse cx="50" cy="58" rx="36" ry="30" fill="#D63A2A"/><path d="M50 26 L42 34 L32 30 L40 38 L50 36 L60 38 L68 30 L58 34Z" fill="#3F6B35"/></symbol>
-  <symbol id="i-havuc" viewBox="0 0 100 100"><path d="M40 30 L60 30 L52 92 Q50 96 48 92Z" fill="#E8832A"/><path d="M50 30 C44 14 36 10 32 12 M50 30 C50 12 52 6 56 6 M50 30 C58 14 66 12 70 14" stroke="#3F6B35" stroke-width="5" fill="none" stroke-linecap="round"/></symbol>
-  <symbol id="i-brokoli" viewBox="0 0 100 100"><rect x="42" y="56" width="16" height="34" rx="6" fill="#8FB46A"/><circle cx="34" cy="44" r="18" fill="#3F7A3A"/><circle cx="66" cy="44" r="18" fill="#3F7A3A"/><circle cx="50" cy="32" r="20" fill="#4C8A44"/></symbol>
-  <symbol id="i-biber" viewBox="0 0 100 100"><path d="M36 30 C20 50 30 90 60 88 C80 86 84 56 66 32 C58 22 44 22 36 30Z" fill="#4E9A3A"/></symbol>
-  <symbol id="i-yaprak" viewBox="0 0 100 100"><path d="M50 90 C20 70 18 30 50 10 C82 30 80 70 50 90Z" fill="#6FA35A"/><path d="M50 90 L50 18" stroke="#3F6B35" stroke-width="3"/></symbol>
-  <symbol id="i-yumurta" viewBox="0 0 100 100"><ellipse cx="50" cy="54" rx="26" ry="34" fill="#E9D6B4"/><ellipse cx="42" cy="42" rx="6" ry="9" fill="#FFF8EC"/></symbol>
-  <symbol id="i-suyu" viewBox="0 0 100 100"><rect x="34" y="20" width="32" height="70" rx="8" fill="#F2A33A"/><rect x="40" y="10" width="20" height="12" rx="3" fill="#3F6B35"/><rect x="34" y="46" width="32" height="18" fill="#FBEFEA"/></symbol>
-  <symbol id="i-narsuyu" viewBox="0 0 100 100"><rect x="34" y="20" width="32" height="70" rx="8" fill="#A3202F"/><rect x="40" y="10" width="20" height="12" rx="3" fill="#3F6B35"/><rect x="34" y="46" width="32" height="18" fill="#FBEFEA"/></symbol>
-  <symbol id="i-kuru" viewBox="0 0 100 100"><path d="M24 34h52l-6 54H30z" fill="#C9A26B"/><path d="M24 34l8-14h36l8 14z" fill="#A9824D"/><circle cx="42" cy="58" r="9" fill="#6B3F2A"/><circle cx="59" cy="66" r="8" fill="#8A5A3A"/></symbol>
-  <symbol id="i-limon" viewBox="0 0 100 100"><ellipse cx="50" cy="54" rx="34" ry="27" fill="#E9CF3A"/><circle cx="38" cy="46" r="7" fill="#F6E88A"/><path d="M82 52l8 2-8 4z" fill="#C9B02A"/></symbol>
-  <symbol id="i-eksi" viewBox="0 0 100 100"><path d="M40 10h20v20l8 10v48a6 6 0 0 1-6 6H38a6 6 0 0 1-6-6V40l8-10z" fill="#5A1424"/><rect x="34" y="52" width="32" height="18" fill="#F6E1DC"/></symbol>
-</defs></svg>
+<div class="modal" id="legal" role="dialog" aria-modal="true" aria-labelledby="lTitle"><div class="card"><div class="qtop"><h2 id="lTitle" style="font-size:30px"></h2><button class="xbtn" data-close aria-label="Kapat">×</button></div><p class="muted" id="lBody" style="margin-top:14px"></p></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<!--/BODY-->
 <script src="assets/app.js" defer></script>
 </body>
 </html>
