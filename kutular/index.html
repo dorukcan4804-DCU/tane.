@@ -92,6 +92,14 @@ header.intro .meta{display:grid;gap:10px;color:var(--mute)}
 /* prints */
 .print{display:flex;flex-direction:column;justify-content:space-between;padding:14px 16px;font-family:var(--display)}
 .seeds{background-image:radial-gradient(circle at 2px 2px,rgba(255,255,255,.14) 1.2px,transparent 1.6px);background-size:18px 18px}
+.ribs{background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.13) 0 2px,transparent 2px 13px),repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 3px,transparent 3px 34px)}
+.crate .front,.crate .back,.crate .left,.crate .right{border-radius:6px;box-shadow:inset 0 0 0 3px rgba(0,0,0,.18),inset 0 10px 0 rgba(255,255,255,.08)}
+.crate .left::after,.crate .right::after{content:"";position:absolute;left:28%;right:28%;top:14px;height:16px;border-radius:9px;background:rgba(0,0,0,.45);box-shadow:inset 0 3px 0 rgba(0,0,0,.35)}
+.crate .emb{font-family:var(--display);font-size:52px;letter-spacing:-.04em;line-height:.9;color:rgba(255,255,255,.92);text-shadow:0 2px 0 rgba(0,0,0,.25),0 -1px 0 rgba(255,255,255,.15)}
+.seal-tag{position:absolute;left:50%;top:-2px;width:34px;margin-left:-17px;height:30px;background:#F8F1E6;border-radius:0 0 6px 6px;color:#1F1A17;font-family:var(--mono);font-size:7px;display:grid;place-items:center;letter-spacing:.06em;box-shadow:0 2px 0 rgba(0,0,0,.25)}
+.lid-label{position:absolute;right:16px;top:16px;width:118px;padding:8px 10px;background:#F8F1E6;border-radius:4px;color:#1F1A17;font-family:var(--mono);font-size:8px;line-height:1.35;box-shadow:0 2px 0 rgba(0,0,0,.2)}
+.lid-label b{display:block;font-family:var(--display);font-size:15px;font-weight:400}
+.crate .lid .out{border-radius:6px;box-shadow:inset 0 0 0 3px rgba(0,0,0,.18)}
 .veins{background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.08) 0 2px,transparent 2px 16px)}
 .comb{background-image:radial-gradient(circle at 50% 50%,rgba(255,255,255,.10) 30%,transparent 32%);background-size:16px 14px}
 .logo-xl{font-size:56px;letter-spacing:-.04em;line-height:.9}
@@ -160,18 +168,18 @@ footer{padding-block:40px;border-top:1px solid var(--line);color:var(--mute);fon
   <header class="intro">
     <div>
       <p class="eyebrow">Ambalaj prototipleri · v0.1 · Kasım 2026</p>
-      <h1>tane<i>.</i> kutuları</h1>
+      <h1>tane<i>.</i> sandık</h1>
     </div>
     <div class="meta">
-      <p>Dört kutu, bir sistem. Her ürün hattının kendi rengi var; logo, mühür ve kart hepsinde aynı. Kutuları sürükleyip çevirebilir, kapağını açabilirsin.</p>
-      <dl class="sheet"><dt>Malzeme</dt><dd>E-dalga oluklu mukavva, dışı ofset baskı</dd><dt>İç</dt><dd>Tek renk iç baskı, pelür, kağıt talaş</dd><dt>Plastik</dt><dd>Yok</dd></dl>
+      <p>Karton koli yok. Meyve kapaklı, kilitli, yıkanabilir bir sandıkta gelir ve sandık her hafta geri döner. Hediye ve kiler için ayrı, sert kapaklı kutular var. Sürükleyip çevirebilir, kapağını açabilirsin.</p>
+      <dl class="sheet"><dt>Sandık</dt><dd>Gıdaya uygun PP, menteşeli kapak, kilit yeri</dd><dt>İç</dt><dd>Pelür, kağıt viyol, kraft bölme, kart</dd><dt>Döngü</dt><dd>Her teslimatta dolu bırakılır, boş alınır</dd></dl>
     </div>
   </header>
 
   <section class="palette" aria-label="Renk sistemi">
-    <div class="sw"><div class="chips"><span style="background:var(--nar);color:var(--kabuk)">Nar #9E2B3A</span><span style="background:var(--nar-in);color:var(--murekkep)">#F4D9D5</span><span style="background:var(--nar-deep);color:var(--kabuk)">#5A1424</span></div><div class="cap"><b>tane. meyve</b><span class="mono">Meyve kutuları</span></div></div>
-    <div class="sw"><div class="chips"><span style="background:var(--yaprak);color:var(--kabuk)">Yaprak #3F5D3A</span><span style="background:var(--yaprak-in);color:var(--murekkep)">#DCE6D2</span><span style="background:var(--yaprak-deep);color:var(--kabuk)">#22351F</span></div><div class="cap"><b>tane. yeşil</b><span class="mono">Sebze kutuları</span></div></div>
-    <div class="sw"><div class="chips"><span style="background:var(--bal);color:var(--murekkep)">Bal #B07A2A</span><span style="background:var(--bal-in);color:var(--murekkep)">#F3E4C4</span><span style="background:var(--pekmez);color:var(--kabuk)">#4A2A12</span></div><div class="cap"><b>tane. kiler</b><span class="mono">Bal, pekmez, peynir · yakında</span></div></div>
+    <div class="sw"><div class="chips"><span style="background:var(--nar);color:var(--kabuk)">Nar #9E2B3A</span><span style="background:var(--nar-in);color:var(--murekkep)">#F4D9D5</span><span style="background:var(--nar-deep);color:var(--kabuk)">#5A1424</span></div><div class="cap"><b>tane. meyve</b><span class="mono">Meyve sandığı</span></div></div>
+    <div class="sw"><div class="chips"><span style="background:var(--yaprak);color:var(--kabuk)">Yaprak #3F5D3A</span><span style="background:var(--yaprak-in);color:var(--murekkep)">#DCE6D2</span><span style="background:var(--yaprak-deep);color:var(--kabuk)">#22351F</span></div><div class="cap"><b>tane. yeşil</b><span class="mono">Sebze sandığı</span></div></div>
+    <div class="sw"><div class="chips"><span style="background:var(--bal);color:var(--murekkep)">Bal #B07A2A</span><span style="background:var(--bal-in);color:var(--murekkep)">#F3E4C4</span><span style="background:var(--pekmez);color:var(--kabuk)">#4A2A12</span></div><div class="cap"><b>tane. kiler</b><span class="mono">Reçel, pekmez, bal</span></div></div>
     <div class="sw"><div class="chips"><span style="background:var(--murekkep);color:var(--kabuk)">Mürekkep #1F1A17</span><span style="background:var(--kabuk);color:var(--murekkep)">#F6F0E6</span><span style="background:#fff;color:var(--murekkep)">Beyaz</span></div><div class="cap"><b>tane.</b><span class="mono">Ana marka, kart, mühür</span></div></div>
   </section>
 
@@ -181,11 +189,11 @@ footer{padding-block:40px;border-top:1px solid var(--line);color:var(--mute);fon
       <span class="hint">sürükle → çevir</span>
       <div class="floor"></div>
       <div class="scene">
-        <div class="b3 spin" style="--W:280px;--H:126px;--D:210px">
-          <div class="f front print seeds" style="background:var(--nar);color:var(--kabuk)"><span class="small">meyve · sofra · ~7 kg</span><span class="logo-xl">tane<i style="color:var(--nar-in)">.</i></span><span class="small">tane tane seçildi</span><div class="band">No. 0127 · Salı dalındaydı</div></div>
-          <div class="f back print seeds" style="background:var(--nar);color:var(--kabuk)"><span class="small">İzmir · Fethiye · Antalya</span><span style="font-size:20px;font-style:italic">Yemeden önce yıkayın.<br>Serin yerde saklayın.</span><span class="small">tane.com.tr</span></div>
-          <div class="f right print seeds" style="background:var(--nar-deep);color:var(--kabuk)"><span class="small">bu taraf yukarı ↑</span><span style="font-size:28px">meyve</span></div>
-          <div class="f left print seeds" style="background:var(--nar-deep);color:var(--kabuk)"><span class="small">elle kutulandı</span><span style="font-size:28px">tane.</span></div>
+        <div class="b3 crate spin" style="--W:300px;--H:120px;--D:200px">
+          <div class="f front print ribs" style="background:var(--nar);color:var(--kabuk);align-items:center;justify-content:center"><span class="emb">tane.</span><span class="small" style="position:absolute;bottom:12px;left:16px">meyve · sofra</span><span class="small" style="position:absolute;bottom:12px;right:16px">No. 0127</span><div class="seal-tag">0127</div></div>
+          <div class="f back print ribs" style="background:var(--nar);color:var(--kabuk);align-items:center;justify-content:center"><span class="emb" style="font-size:36px">tane.</span><span class="small" style="position:absolute;bottom:12px">gıdaya uygun · yıkanabilir · iade edilir</span></div>
+          <div class="f right ribs" style="background:var(--nar-deep)"></div>
+          <div class="f left ribs" style="background:var(--nar-deep)"></div>
           <div class="f bottom" style="background:var(--nar-deep)"></div>
           <div class="f in front" style="background:var(--nar-in)"></div><div class="f in back" style="background:var(--nar-in)"></div><div class="f in left" style="background:var(--nar-in)"></div><div class="f in right" style="background:var(--nar-in)"></div><div class="f in bottom" style="background:var(--nar-in)"></div>
           <div class="f tissue"><div class="paper" style="background:#FBEDEA;background-image:repeating-linear-gradient(80deg,rgba(158,43,58,.06) 0 3px,transparent 3px 11px)"></div>
@@ -194,24 +202,25 @@ footer{padding-block:40px;border-top:1px solid var(--line);color:var(--mute);fon
             <div class="fr" style="left:140px;top:96px;width:44px;height:62px;background:#3E5A2A;border-radius:50% 50% 46% 46%"></div>
             <div class="fr" style="left:196px;top:100px;width:48px;height:48px;background:#8DB33E;box-shadow:inset 0 0 0 6px #7A5A33"></div>
             <div class="fr" style="left:30px;top:110px;width:52px;height:52px;background:#E7C53D"></div>
-            <div class="card">Bu hafta kutuda<small>8 ürün · Seferihisar, Köyceğiz…</small></div></div>
-          <div class="lidpos"><div class="lid"><div class="out seeds" style="background:var(--nar);display:grid;place-items:center"><span style="font-family:var(--display);font-size:64px;color:var(--kabuk);letter-spacing:-.04em">tane<span style="color:var(--nar-in)">.</span></span><div class="band" style="writing-mode:horizontal-tb;left:0;right:0;width:auto;margin:0;top:auto;bottom:0;height:22px"></div></div><div class="inn" style="background:var(--nar-in);display:grid;place-items:center;font-family:var(--display);font-style:italic;font-size:22px;color:var(--nar)">Afiyet olsun.</div><div class="lip seeds" style="background:var(--nar)"></div></div></div>
+            <div class="card">Bu hafta sandıkta<small>13 çeşit · Seferihisar, Köyceğiz…</small></div></div>
+          <div class="lidpos"><div class="lid"><div class="out ribs" style="background:var(--nar);display:grid;place-items:center"><span class="emb" style="font-size:60px">tane.</span><div class="lid-label"><b>31 saat</b>Seferihisar 07:40 → Bostanlı 15:10<br>No. 0127 · elle seçildi</div></div><div class="inn" style="background:var(--nar-in);display:grid;place-items:center;font-family:var(--display);font-style:italic;font-size:22px;color:var(--nar)">Afiyet olsun.</div><div class="lip ribs" style="background:var(--nar)"></div></div></div>
         </div>
       </div>
       <div class="ctrl"><button data-open aria-pressed="false">Kapağı aç</button><button data-spin aria-pressed="true">Dönsün</button></div>
     </div>
     <div class="spec">
-      <span class="pill" style="color:var(--nar)">Lansman · amiral ürün</span>
-      <h2>tane. meyve · Sofra</h2>
-      <p class="tagline">Dışı nar kırmızısı, içi pembe kabuk. Kapak açılınca ilk önce "Afiyet olsun." yazısı, sonra pelüre sarılı meyveler ve haftanın kartı görünür.</p>
+      <span class="pill" style="color:var(--nar)">Ana ambalaj · Sofra, Bolluk, Kendi kutun</span>
+      <h2>tane. sandık · meyve</h2>
+      <p class="tagline">Karton koli değil: kapaklı, kilitli, yıkanabilir bir sandık. Kapak açılınca pelüre sarılı meyveler ve haftanın kartı görünür. Kapaktaki etiket, meyvenin kaç saat önce dalında olduğunu yazar.</p>
       <table>
-        <tr><td>Ölçü</td><td>40 × 30 × 18 cm, ~7 kg</td></tr>
-        <tr><td>Aynı kalıp</td><td>Tadım 30 × 20 × 15 · Bolluk 50 × 35 × 20</td></tr>
-        <tr><td>Dış baskı</td><td>Nar zemin, kabuk renk logo, çekirdek deseni; kapakta kör kabartma logo</td></tr>
-        <tr><td>İç baskı</td><td>Pembe kabuk zemin, kapak içinde "Afiyet olsun."</td></tr>
-        <tr><td>Mühür</td><td>Numaralı kabuk renk kağıt şerit, kapaktan öne iner</td></tr>
-        <tr><td>İçerik katmanı</td><td>Pelür, haftanın kartı, hassas meyveye kağıt viyol, kağıt talaş</td></tr>
-        <tr><td>Tahmini birim maliyet</td><td>~70–90 TL (500 adet; matbaa teklifiyle netleşir)</td></tr>
+        <tr><td>Tip</td><td>Kapağı gövdeye bağlı, menteşeli plastik sandık (ALC)</td></tr>
+        <tr><td>Ölçü</td><td>Sofra 60 × 40 × 24 cm · Bolluk 60 × 40 × 32 cm</td></tr>
+        <tr><td>Malzeme</td><td>Gıdaya uygun polipropilen; yıkanır, dezenfekte edilir</td></tr>
+        <tr><td>Kapak</td><td>Menteşeli, kilit yerli; üstte tazelik etiketi yeri</td></tr>
+        <tr><td>Mühür</td><td>Kilit deliğinden geçen numaralı, tek kullanımlık mühür</td></tr>
+        <tr><td>Marka</td><td>Yanlarda kabartma ya da serigrafi logo; nar kırmızısı</td></tr>
+        <tr><td>İç</td><td>Pelür, kağıt viyol, kraft bölme, haftanın kartı</td></tr>
+        <tr><td>Tahmini maliyet</td><td>~600–1.000 TL / adet; ~50 kullanımda teslimat başına ~15 TL</td></tr>
       </table>
     </div>
   </section>
@@ -222,11 +231,11 @@ footer{padding-block:40px;border-top:1px solid var(--line);color:var(--mute);fon
       <span class="hint">sürükle → çevir</span>
       <div class="floor"></div>
       <div class="scene">
-        <div class="b3 spin" style="--W:280px;--H:126px;--D:210px;--ry:-140deg">
-          <div class="f front print veins" style="background:var(--yaprak);color:var(--kabuk)"><span class="small">yeşil · mutfak · ~7 kg</span><span class="logo-xl">tane<i style="color:var(--yaprak-in)">.</i></span><span class="small">tarladan bu haftanın sekizi</span><div class="band">No. 0128 · Salı tarladaydı</div></div>
-          <div class="f back print veins" style="background:var(--yaprak);color:var(--kabuk)"><span class="small">İzmir · Fethiye · Antalya</span><span style="font-size:20px;font-style:italic">Yeşillikleri ilk iki gün tüketin.</span><span class="small">tane.com.tr</span></div>
-          <div class="f right print veins" style="background:var(--yaprak-deep);color:var(--kabuk)"><span class="small">bu taraf yukarı ↑</span><span style="font-size:28px">yeşil</span></div>
-          <div class="f left print veins" style="background:var(--yaprak-deep);color:var(--kabuk)"><span class="small">elle kutulandı</span><span style="font-size:28px">tane.</span></div>
+        <div class="b3 crate spin" style="--W:300px;--H:120px;--D:200px;--ry:-140deg">
+          <div class="f front print ribs" style="background:var(--yaprak);color:var(--kabuk);align-items:center;justify-content:center"><span class="emb">tane.</span><span class="small" style="position:absolute;bottom:12px;left:16px">sebze · mutfak</span><span class="small" style="position:absolute;bottom:12px;right:16px">No. 0128</span><div class="seal-tag">0128</div></div>
+          <div class="f back print ribs" style="background:var(--yaprak);color:var(--kabuk);align-items:center;justify-content:center"><span class="emb" style="font-size:36px">tane.</span><span class="small" style="position:absolute;bottom:12px">gıdaya uygun · yıkanabilir · iade edilir</span></div>
+          <div class="f right ribs" style="background:var(--yaprak-deep)"></div>
+          <div class="f left ribs" style="background:var(--yaprak-deep)"></div>
           <div class="f bottom" style="background:var(--yaprak-deep)"></div>
           <div class="f in front" style="background:var(--yaprak-in)"></div><div class="f in back" style="background:var(--yaprak-in)"></div><div class="f in left" style="background:var(--yaprak-in)"></div><div class="f in right" style="background:var(--yaprak-in)"></div><div class="f in bottom" style="background:var(--yaprak-in)"></div>
           <div class="f tissue"><div class="paper" style="background:#EEF3E8;background-image:repeating-linear-gradient(80deg,rgba(63,93,58,.07) 0 3px,transparent 3px 11px)"></div>
@@ -235,23 +244,22 @@ footer{padding-block:40px;border-top:1px solid var(--line);color:var(--mute);fon
             <div class="fr" style="left:130px;top:96px;width:110px;height:22px;border-radius:12px;background:#E8832A"></div>
             <div class="fr" style="left:140px;top:130px;width:90px;height:36px;border-radius:18px;background:#4E9A3A"></div>
             <div class="fr" style="left:28px;top:112px;width:70px;height:50px;border-radius:40% 60% 50% 50%;background:#6FA35A"></div>
-            <div class="card">Bu hafta kutuda<small>8 ürün · Kumluca, Menemen…</small></div></div>
-          <div class="lidpos"><div class="lid"><div class="out veins" style="background:var(--yaprak);display:grid;place-items:center"><span style="font-family:var(--display);font-size:64px;color:var(--kabuk);letter-spacing:-.04em">tane<span style="color:var(--yaprak-in)">.</span></span><div class="band" style="writing-mode:horizontal-tb;left:0;right:0;width:auto;margin:0;top:auto;bottom:0;height:22px"></div></div><div class="inn" style="background:var(--yaprak-in);display:grid;place-items:center;font-family:var(--display);font-style:italic;font-size:22px;color:var(--yaprak)">Kolay gelsin.</div><div class="lip veins" style="background:var(--yaprak)"></div></div></div>
+            <div class="card">Bu hafta sandıkta<small>12 çeşit · Kumluca, Menemen…</small></div></div>
+          <div class="lidpos"><div class="lid"><div class="out ribs" style="background:var(--yaprak);display:grid;place-items:center"><span class="emb" style="font-size:60px">tane.</span><div class="lid-label"><b>31 saat</b>Menemen 06:50 → Bornova 10:20<br>No. 0128 · elle seçildi</div></div><div class="inn" style="background:var(--yaprak-in);display:grid;place-items:center;font-family:var(--display);font-style:italic;font-size:22px;color:var(--yaprak)">Kolay gelsin.</div><div class="lip ribs" style="background:var(--yaprak)"></div></div></div>
         </div>
       </div>
       <div class="ctrl"><button data-open aria-pressed="false">Kapağı aç</button><button data-spin aria-pressed="true">Dönsün</button></div>
     </div>
     <div class="spec">
-      <span class="pill" style="color:var(--yaprak)">Lansman</span>
-      <h2>tane. yeşil · Mutfak</h2>
-      <p class="tagline">Sebze kutusu meyveden ayrı bir dünya: yaprak yeşili, damar deseni ve "Kolay gelsin." Böylece sebze bir ihtiyaç listesi gibi değil, markanın ikinci rengi gibi duruyor.</p>
+      <span class="pill" style="color:var(--yaprak)">Sebze eklenince</span>
+      <h2>tane. sandık · sebze</h2>
+      <p class="tagline">Aynı kalıp, yaprak yeşili. Sebze meyve sandığına eklendiğinde ayrı, yeşil sandıkta gelir; meyveyle ezilmez, karışmaz.</p>
       <table>
-        <tr><td>Ölçü</td><td>40 × 30 × 18 cm, ~7 kg (meyveyle aynı kalıp)</td></tr>
-        <tr><td>Dış baskı</td><td>Yaprak zemin, damar deseni, kabuk renk logo</td></tr>
-        <tr><td>İç baskı</td><td>Filiz yeşili, kapak içinde "Kolay gelsin."</td></tr>
-        <tr><td>İçerik katmanı</td><td>Yeşillik kağıt şeritle demetli; domates kağıt viyolde</td></tr>
-        <tr><td>Karma kutu</td><td>Aynı kalıp; kapak nar, gövde yaprak (İkisi Bir Arada)</td></tr>
-        <tr><td>Tahmini birim maliyet</td><td>~65–80 TL (500 adet)</td></tr>
+        <tr><td>Ölçü</td><td>60 × 40 × 24 cm (meyveyle aynı kalıp)</td></tr>
+        <tr><td>Renk</td><td>Yaprak yeşili; logo ve etiket aynı</td></tr>
+        <tr><td>İç</td><td>Yeşillik kağıt şeritle demetli; domates kağıt viyolde</td></tr>
+        <tr><td>Kapak içi</td><td>"Kolay gelsin." etiketi</td></tr>
+        <tr><td>Tahmini maliyet</td><td>Meyve sandığıyla aynı</td></tr>
       </table>
     </div>
   </section>
@@ -280,16 +288,16 @@ footer{padding-block:40px;border-top:1px solid var(--line);color:var(--mute);fon
       <div class="ctrl"><button data-open aria-pressed="false">Kapağı aç</button><button data-spin aria-pressed="true">Dönsün</button></div>
     </div>
     <div class="spec">
-      <span class="pill" style="color:var(--nar)">Eklenti · +150 TL</span>
+      <span class="pill" style="color:var(--nar)">Seçkin · hediye paketi +150 TL</span>
       <h2>Hediye kutusu</h2>
-      <p class="tagline">Ters renk: dışı kabuk rengi, içi nar. Nar kırmızısı kurdele ve "t." mühürlü balmumu. Yılbaşı, Sevgililer Günü ve Anneler Günü kampanyalarının kutusu.</p>
+      <p class="tagline">Müşteride kalan tek kutu. Sert mukavva, kapaklı; dışı kabuk rengi, içi nar. Nar kırmızısı kurdele ve "t." mühürlü balmumu. Seçkin kutusu ve hediye siparişleri bununla gider.</p>
       <table>
-        <tr><td>Ölçü</td><td>30 × 20 × 15 cm (Tadım), Sofra boyunda da var</td></tr>
+        <tr><td>Ölçü</td><td>40 × 30 × 15 cm (Seçkin)</td></tr>
         <tr><td>Dış</td><td>Kabuk zemin, nar logo, gros grain kurdele</td></tr>
         <tr><td>Mühür</td><td>Balmumu görünümlü kabartma etiket "t."</td></tr>
         <tr><td>İç</td><td>Nar zemin, kapak içinde "Senin için."</td></tr>
         <tr><td>Kart</td><td>Siparişteki not, el yazısı fontuyla basılır</td></tr>
-        <tr><td>Tahmini ek maliyet</td><td>~45–60 TL (kurdele, mühür, kart)</td></tr>
+        <tr><td>Tahmini maliyet</td><td>~100–150 TL / adet</td></tr>
       </table>
     </div>
   </section>
@@ -318,22 +326,22 @@ footer{padding-block:40px;border-top:1px solid var(--line);color:var(--mute);fon
       <div class="ctrl"><button data-open aria-pressed="false">Kapağı aç</button><button data-spin aria-pressed="true">Dönsün</button></div>
     </div>
     <div class="spec">
-      <span class="pill" style="color:var(--bal)">Yakında · Faz 2</span>
+      <span class="pill" style="color:var(--bal)">Kiler seti · 1.390 TL</span>
       <h2>tane. kiler</h2>
-      <p class="tagline">Bal, pekmez ve peynir için yassı bir kahvaltı kutusu. Pekmez rengi gövde, bal rengi yanlar, petek deseni. Kargoya da uygun, çünkü Türkiye geneline gönderilecek tek hat bu.</p>
+      <p class="tagline">İki reçel, bir pekmez ve çam balı için yassı, sert kapaklı hediye kutusu. Pekmez rengi gövde, bal rengi yanlar, petek deseni.</p>
       <table>
         <tr><td>Ölçü</td><td>30 × 22 × 10 cm</td></tr>
-        <tr><td>İç</td><td>Kalıplı kağıt yuva: 2 kavanoz + 1 peynir paketi</td></tr>
+        <tr><td>İç</td><td>Kalıplı kağıt yuva: 4 kavanoz</td></tr>
         <tr><td>Kart</td><td>Üretici adı, köy, parti numarası, analiz QR'ı</td></tr>
-        <tr><td>Kargo</td><td>Bal ve pekmez kargoyla; peynir sadece bizim teslimat günlerinde</td></tr>
+        <tr><td>Teslimat</td><td>Meyve sandığıyla aynı gün, aynı kapıya</td></tr>
         <tr><td>Tahmini birim maliyet</td><td>~60–80 TL (300 adet)</td></tr>
       </table>
     </div>
   </section>
 
   <section class="details">
-    <p class="eyebrow">Kutunun içindekiler</p>
-    <h2 style="font-size:clamp(34px,4.6vw,56px)">Her kutuda aynı üç parça.</h2>
+    <p class="eyebrow">Sandığın içindekiler</p>
+    <h2 style="font-size:clamp(34px,4.6vw,56px)">Her sandıkta aynı üç parça.</h2>
     <div class="dgrid">
       <div class="dcard">
         <h3>Haftanın kartı (A6)</h3>
@@ -344,7 +352,7 @@ footer{padding-block:40px;border-top:1px solid var(--line);color:var(--mute);fon
         <h3>Mühür + tazelik etiketi</h3>
         <div class="seal"><span>No. 0127</span><b>31 saat</b><span>Köyceğiz 07:40 → Bostanlı 15:10</span></div>
         <div class="seal" style="border-color:var(--yaprak)"><span>No. 0128</span><b>26 saat</b><span>Menemen 06:50 → Bornova 09:10</span></div>
-        <p>Kapaktan öne inen numaralı şerit, toplama saatini, bahçeyi ve teslim saatini taşır. "Taze" demek yerine saati yazar. Türkiye'de bunu yapan kutu yok. Boş kutuyu geri veren 30 TL kredi kazanır; kutu 3–4 kez döner.</p>
+        <p>Kilit deliğinden geçen numaralı mühür ve kapaktaki etiket; toplama saatini, bahçeyi ve teslim saatini taşır. "Taze" demek yerine saati yazar. Türkiye'de bunu yapan kutu yok. Boş kutuyu geri veren 30 TL kredi kazanır; kutu 3–4 kez döner.</p>
       </div>
       <div class="dcard">
         <h3>Etiket ve dolgu</h3>
@@ -360,11 +368,11 @@ footer{padding-block:40px;border-top:1px solid var(--line);color:var(--mute);fon
   </section>
 
   <section class="details">
-    <p class="eyebrow">Kutu açılışı</p>
+    <p class="eyebrow">Sandık açılışı</p>
     <h2 style="font-size:clamp(34px,4.6vw,56px)">Kameraya göre tasarlandı.</h2>
     <div class="steps">
-      <div class="step"><span>1 · kapı</span><b>Mühürlü kutu</b><p>Renk ve numara ilk karede görünür.</p></div>
-      <div class="step"><span>2 · kapak</span><b>"Afiyet olsun."</b><p>Kapak içi yazısı kutu açıldığı an okunur.</p></div>
+      <div class="step"><span>1 · kapı</span><b>Mühürlü sandık</b><p>Renk ve numara ilk karede görünür.</p></div>
+      <div class="step"><span>2 · kapak</span><b>"Afiyet olsun."</b><p>Kapak içi yazısı sandık açıldığı an okunur.</p></div>
       <div class="step"><span>3 · pelür</span><b>Etiketli pelür</b><p>Kağıt sesi ve etiket, videonun ASMR anı.</p></div>
       <div class="step"><span>4 · kart</span><b>Haftanın kartı</b><p>İçerik, üretici ve QR.</p></div>
       <div class="step"><span>5 · meyve</span><b>Tane tane dizili</b><p>Renk sırasıyla dizilir, üstten çekim için.</p></div>
@@ -384,39 +392,19 @@ footer{padding-block:40px;border-top:1px solid var(--line);color:var(--mute);fon
   </section>
 
   <section class="details">
-    <p class="eyebrow">Matbaa için</p>
-    <h2 style="font-size:clamp(34px,4.6vw,56px)">Teknik şartname ve açılım.</h2>
-    <style>
-      .tech{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:28px;align-items:start}
-      @media(max-width:920px){.tech{grid-template-columns:minmax(0,1fr)}}
-      .die{background:var(--panel);border-radius:20px;padding:18px;min-width:0}
-      .die svg{width:100%;height:auto;display:block}
-      .die .pn{fill:var(--kabuk);stroke:var(--murekkep);stroke-width:1.2}
-      .die .pn.fl{fill:var(--nar-in);stroke-dasharray:4 3}
-      .die text{font-family:var(--mono);font-size:8px;fill:var(--murekkep)}
-      .die text.dm{fill:var(--fg);font-size:10px}
-      .scroll{overflow-x:auto;min-width:0}
-      .scroll table{min-width:460px}
-      .scroll td{padding-right:12px}
-    </style>
-    <div class="tech">
-      <div class="die"><svg viewBox="-34 0 510 646" role="img" aria-label="Sofra kutusu açılım şeması"><rect x="120" y="20" width="200" height="81" class="pn fl"/><text x="220" y="64" text-anchor="middle">kapak dili</text><rect x="120" y="101" width="200" height="150" class="pn "/><text x="220" y="180" text-anchor="middle">KAPAK · dış: logo · iç: “Afiyet olsun.”</text><rect x="120" y="251" width="200" height="90" class="pn "/><text x="220" y="300" text-anchor="middle">arka yüz</text><rect x="120" y="341" width="200" height="150" class="pn "/><text x="220" y="420" text-anchor="middle">TABAN</text><rect x="30" y="341" width="90" height="150" class="pn "/><text x="75" y="420" text-anchor="middle">yan · delik</text><rect x="320" y="341" width="90" height="150" class="pn "/><text x="365" y="420" text-anchor="middle">yan · delik</text><rect x="70" y="101" width="50" height="150" class="pn fl"/><text x="95" y="180" text-anchor="middle">toz kapağı</text><rect x="320" y="101" width="50" height="150" class="pn fl"/><text x="345" y="180" text-anchor="middle">toz kapağı</text><rect x="120" y="491" width="200" height="90" class="pn "/><text x="220" y="540" text-anchor="middle">ÖN YÜZ · logo + mühür şeridi</text><rect x="120" y="581" width="200" height="45" class="pn fl"/><text x="220" y="608" text-anchor="middle">kilit dili</text><text x="220" y="642" text-anchor="middle" class="dm">40 cm</text><text x="22" y="416" text-anchor="end" class="dm">30 cm</text><text x="416" y="536" class="dm">18 cm</text></svg><p class="mono" style="color:var(--mute);margin-top:10px">Sofra kutusu şematik açılımı (FEFCO 0427, kendinden kilitli). Kesikli paneller katlanan dil ve kapaklardır. Gerçek bıçak izini matbaa çizer.</p></div>
-      <div class="scroll">
-        <table>
-          <tr><td></td><td><b>Tadım</b></td><td><b>Sofra / Mutfak</b></td><td><b>Bolluk</b></td></tr>
-          <tr><td>İç ölçü (cm)</td><td>30 × 20 × 15</td><td>40 × 30 × 18</td><td>50 × 35 × 20</td></tr>
-          <tr><td>Dolu ağırlık</td><td>4–5 kg</td><td>7–8 kg</td><td>11–12 kg</td></tr>
-          <tr><td>Mukavva</td><td>B dalga</td><td>B dalga</td><td>BC çift oluk</td></tr>
-          <tr><td>İç düzen</td><td>Pelür + 4 gözlü viyol</td><td>Pelür + 6 gözlü viyol + bölme</td><td>Pelür + 2 viyol + bölme</td></tr>
-          <tr><td>Havalandırma</td><td>2 delik</td><td>4 delik (tutma yeri)</td><td>4 delik (tutma yeri)</td></tr>
-          <tr><td>Araçta istif</td><td>5 kat</td><td>4 kat</td><td>3 kat</td></tr>
-        </table>
-        <p style="color:var(--mute);font-size:14px;margin-top:14px">Sıra: 1) baskısız beyaz numune, 2) gerçek ürünle dolum ve yol testi, 3) 50–100 adet dijital baskı, 4) 500+ ofset. Ölçüler dolum testinden sonra kesinleşir.</p>
-      </div>
+    <p class="eyebrow">Sandık döngüsü</p>
+    <h2 style="font-size:clamp(34px,4.6vw,56px)">Her hafta geri döner.</h2>
+    <div class="steps">
+      <div class="step"><span>1 · Salı</span><b>Doldurulur</b><p>Meyve sandığa dizilir, mühürlenir, kapağa tazelik etiketi yapıştırılır.</p></div>
+      <div class="step"><span>2 · Çarşamba</span><b>Kapıda</b><p>Sandık elden teslim edilir; bir hafta müşteride kalır.</p></div>
+      <div class="step"><span>3 · sonraki hafta</span><b>Değişim</b><p>Dolu sandık bırakılır, boş olan alınır.</p></div>
+      <div class="step"><span>4 · Perşembe</span><b>Yıkanır</b><p>Yıkanır, dezenfekte edilir, kurutulur ve tekrar dolar.</p></div>
+      <div class="step"><span>kural</span><b>İade</b><p>Tek seferlik siparişte kapıda boşaltılır ya da sonraki hafta alınır. İade edilmeyen sandık 750 TL.</p></div>
     </div>
+    <p style="color:var(--mute);font-size:14px;margin-top:22px;max-width:760px">İlk adımlar: İzmir'de iki tedarikçiden 60 × 40 sandık numunesi ve teklif, gıdaya uygunluk belgesi, gerçek ürünle dolum ve 3 kat istif testi. Haftada 60 teslimat için ~150 sandık gerekir. Özel renk yüksek minimum sipariş isteyebilir; ilk partide standart renk ve serigrafi logo yeterli.</p>
   </section>
 
-  <footer>tane. ambalaj prototipleri v0.1 · ölçüler ve maliyetler matbaa teklifiyle netleşir · Kasım 2026</footer>
+  <footer>tane. sandık ve ambalaj prototipleri v0.2 · ölçüler ve maliyetler tedarikçi teklifiyle netleşir · Kasım 2026</footer>
 </div>
 
 <script>

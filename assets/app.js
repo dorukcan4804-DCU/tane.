@@ -306,7 +306,7 @@ function fly(from){
   requestAnimationFrame(() => requestAnimationFrame(() => { dot.style.transform = `translate(${t.left + t.width/2 - r.left - r.width/2}px, ${t.top + t.height/2 - r.top - r.height/2}px) scale(.6)`; dot.style.opacity = ".3"; }));
   setTimeout(() => { dot.remove(); $("#cartBtn").classList.add("bump"); setTimeout(() => $("#cartBtn").classList.remove("bump"), 500); }, 720);
 }
-const FIELDS = ["fDay","fSlot","fSemt","fName","fTel","fAddr","fHeard","fDoor","fVideo"];
+const FIELDS = ["fDay","fSlot","fSemt","fName","fTel","fAddr","fHeard","fDoor","fVideo","fCrate"];
 function keepForm(){ FIELDS.forEach(f => { const el = $("#" + f); if (el) form[f] = el.type === "checkbox" ? el.checked : el.value; }); }
 function restoreForm(){ FIELDS.forEach(f => { const el = $("#" + f); if (!el || form[f] === undefined) return; if (el.type === "checkbox") el.checked = form[f]; else if (el.tagName !== "SELECT" || [...el.options].some(o => o.value === form[f])) el.value = form[f]; }); }
 function renderCart(){
@@ -328,7 +328,8 @@ function renderCart(){
       <div class="two"><label class="field" for="fName">Ad soyad<input id="fName" autocomplete="name" maxlength="60"></label><label class="field" for="fTel">Telefon<input id="fTel" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="05xx xxx xx xx"></label></div>
       <label class="field" for="fAddr">Açık adres<textarea id="fAddr" maxlength="240" placeholder="Mahalle, sokak, bina, daire"></textarea></label>
       <label class="field" for="fHeard">Bizi nereden duydun?<select id="fHeard"><option>Instagram</option><option>TikTok</option><option>YouTube</option><option>Google</option><option>Arkadaş tavsiyesi</option><option>Diğer</option></select></label>
-      <label class="check" for="fDoor"><input type="checkbox" id="fDoor" checked><span>Evde yoksam kutu kapıya ya da kapıcıya bırakılabilir</span></label>
+      <label class="check" for="fDoor"><input type="checkbox" id="fDoor" checked><span>Evde yoksam sandık kapıya ya da kapıcıya bırakılabilir</span></label>
+      <label class="check" for="fCrate"><input type="checkbox" id="fCrate"><span>Meyvelerim kapaklı tane. sandığında gelir. Sandığı bir sonraki teslimatta geri vereceğim; iade etmezsem 750 TL ödeyeceğim.</span></label>
       <label class="check" for="fVideo"><input type="checkbox" id="fVideo"><span>Teslimatımın videosu yüzüm ve adresim görünmeden paylaşılabilir</span></label>`;
     foot.innerHTML = `<div class="total"><span>Toplam<br><small>Teslimat ücretsiz</small></span><b>${tl(s)}</b></div><div style="display:grid;grid-template-columns:auto 1fr;gap:8px"><button class="btn line sm" data-step="1">Geri</button><button class="btn" data-step="3">Devam</button></div>`;
     $("#fDay").value = day.id; restoreForm(); $("#fDay").value = day.id;
@@ -347,7 +348,7 @@ function renderCart(){
 function waLink(day){
   const F = form, L = [`Merhaba ${CONFIG.brand}, sipariş vermek istiyorum.`, ""];
   cart.forEach((c,i) => { L.push(`${i+1}. ${c.name}${c.freq ? " (" + freqLabel(c.freq) + ")" : ""} – ${tl(c.price)}`); c.lines.forEach(x => L.push("   " + x)); });
-  L.push("", `Toplam: ${tl(subtotal())} (teslimat ücretsiz)`, `Teslimat: ${day.day} ${F.fSlot} · ${F.fSemt}, İzmir`, `Ad: ${F.fName}`, `Tel: ${F.fTel}`, `Adres: ${F.fAddr}`, `Kapıya bırakılabilir: ${F.fDoor ? "Evet" : "Hayır"}`, `Video paylaşımı: ${F.fVideo ? "İzin veriyorum" : "İzin vermiyorum"}`, `Bizi buradan duydum: ${F.fHeard}`);
+  L.push("", `Toplam: ${tl(subtotal())} (teslimat ücretsiz)`, `Teslimat: ${day.day} ${F.fSlot} · ${F.fSemt}, İzmir`, `Ad: ${F.fName}`, `Tel: ${F.fTel}`, `Adres: ${F.fAddr}`, `Kapıya bırakılabilir: ${F.fDoor ? "Evet" : "Hayır"}`, `Sandık: iade kuralını onayladı`, `Video paylaşımı: ${F.fVideo ? "İzin veriyorum" : "İzin vermiyorum"}`, `Bizi buradan duydum: ${F.fHeard}`);
   return "https://wa.me/" + encodeURIComponent(CONFIG.whatsapp) + "?text=" + encodeURIComponent(L.join("\n").slice(0, 3500));
 }
 $("#cart").addEventListener("click", e => {
@@ -363,6 +364,7 @@ $("#cart").addEventListener("click", e => {
         if (!form.fName.trim()) miss.push("ad soyad");
         if (!/^[0-9 +()-]{10,20}$/.test(form.fTel.trim())) miss.push("geçerli bir telefon");
         if (form.fAddr.trim().length < 10) miss.push("açık adres");
+        if (!form.fCrate) miss.push("sandık onayı");
         if (miss.length){ toast("Eksik: " + miss.join(", ")); return; }
       }
     }
